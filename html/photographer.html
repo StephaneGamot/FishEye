@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="robots" content="index,follow" />
+		<title>Fisheye - Fotograph</title>
+		<meta name="description" content="Créez un site accessible pour une plateforme de photographes" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- CSS -->
+		<link rel="stylesheet" href="../css/normalize.css" type="text/css" />
+		<link href="../css/style.css" rel="stylesheet" type="text/css" />
+
+		<link rel="canonical" href="https://www.XXXX-fr.html" />
+		<link rel="icon" type="image/png" href="assets/favicon.png" />
+
+		<link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
+		<!-- SCRIPT -->
+		<script src="https://kit.fontawesome.com/faccb176b2.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<header>
+			<a href="../index.html">
+				<img src="../assets/images/logo.png" class="logo" alt="Logo de la Societe Fisheye" />
+			</a>
+		</header>
+		<main>
+			<section id="head-main">
+				<button type="button" id="btnContact" class="contact_button" aria-expanded="false" aria-controls="contact_modal">Contactez-moi</button>
+
+				<div id="contact_modal" aria-hidden="true">
+					<div class="modal" role="dialog" aria-labelledby="modal">
+						<header>
+							<div id="ModalH1"><br /></div>
+							<img src="../assets/icons/close.svg" id="close-modal" alt="Croix permettant la fermeture du modal" />
+						</header>
+						<form>
+							<div>
+								<label for="firstName">Prénom</label>
+								<input type="text" id="firstName" name="firstName" />
+								<div id="firstNameErr"></div>
+							</div>
+							<div>
+								<label for="lastName">Nom</label>
+								<input type="text" id="lastName" name="lastName" />
+								<div id="lastNameErr"></div>
+							</div>
+							<div>
+								<label for="email">Email</label>
+								<input type="email" id="email" name="email" />
+								<div id="emailErr"></div>
+							</div>
+							<div>
+								<label for="message">Votre message</label>
+								<textarea name="textarea" rows="5" type="text" id="message"></textarea>
+								<div id="messageErr"></div>
+							</div>
+							<button type="submit" id="btnSend" class="contact_button">Envoyer</button>
+						</form>
+					</div>
+				</div>
+			</section>
+
+			<div id="selector">
+				<h3>Trier par</h3>
+				<div class="dropdown-border">
+					<div class="dropdown">
+						<button type="button" id="dropdown-button-popular" class="dropdown-button" aria-label="Popularité">
+							Popularité<i id="arrow" class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+						</button>
+						<div id="dropdown-menu">
+							<hr />
+							<button type="button" id="dropdown-button-date" class="dropdown-button" aria-label="Date">Date</button>
+							<hr />
+							<button type="button" id="dropdown-button-title" class="dropdown-button" aria-label="Titre">Titre</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<section id="gallery-media" class="photograph-gallery"></section>
+
+			<section>
+				<div class="slider-container" aria-hidden="true" id="sliderContainer">
+					<button type="button" id="slider-btn-right" class="direction-btn right" aria-label="right arrow">
+						<i class="fa-solid fa-chevron-right fa-3x"></i>
+					</button>
+					<button type="button" id="slider-btn-left" class="direction-btn left" aria-label="left arrow">
+						<i class="fa-solid fa-chevron-left fa-3x"></i>
+					</button>
+					<button id="modal-close-slider" type="button" aria-label="Croix permettant la fermeture du modal" class="modal-close-slider">
+						<i class="fa-solid fa-xmark fa-3x"></i>
+					</button>
+
+					<div class="slide" id="slide"></div>
+				</div>
+			</section>
+
+			<div id="allLikes">
+				<div><span id="allLikesNumber"></span>&nbsp;<i class="fa-solid fa-heart"></i></div>
+				<div><span id="dailyPrice"></span>€ / jour</div>
+			</div>
+		</main>
+
+		<script type="module" src="../javascript/pages/photographer.js"></script>
+	</body>
+</html>
