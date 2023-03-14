@@ -21,3 +21,4 @@ console.log(photographers);
 }
 
 init();
+console.log(document);

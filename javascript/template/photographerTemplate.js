@@ -12,7 +12,7 @@ export default function photographerTemplate(data) {
 
 		const imgPortrait = document.createElement("img");
 		imgPortrait.setAttribute("src", picture);
-		imgPortrait.setAttribute("alt", name);
+		imgPortrait.setAttribute("alt", "nom du photographe : " + name);
 
 		const h2Name = document.createElement("h2");
 		h2Name.textContent = name;

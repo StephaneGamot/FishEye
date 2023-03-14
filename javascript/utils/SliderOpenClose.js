@@ -14,14 +14,13 @@ const sliderWidth = sliderContainer.offsetWidth;
 //console.log(slides[0]);
 
 export function displayPhotosModalSlider() {
-	//const indexElement = document.getElementsByClassName("index")[0]; // on récupère le premier élément avec la classe "index"
-	//console.log(indexElement);
+
 
 	mediaByFactory.forEach((elem) => {
 		if ("image" in elem) {
 			const photoMedia = SliderPhotoTemplate(elem); // Òbjet avce les infos de la photos
 			const photoMediaDom = photoMedia.createImgElement(); // la phot dans le dom
-//console.log(photoMediaDom);
+
 			slide.appendChild(photoMediaDom);
 		} else if ("video" in elem) {
 			const videoMedia = SliderVideoTemplate(elem); // Òbjet avce les infos de la photos

@@ -2,15 +2,12 @@ import {mediaByFactory, galleryMedia}  from "../Config/GetAllData.js"
 import {VideoTemplate} from "../template/VideoTemplate.js"
 import photoTemplate from "../template/photoTemplate.js"
 
-
 export default async function photographerMediaCreateDom() {
 	
 	mediaByFactory.forEach((elem) => {
 		if ("image" in elem) {
 			const photoMedia = photoTemplate(elem); // Òbjet avce les infos de la photos
 			const photoMediaDom = photoMedia.photoTemplateCardDom(); // la phot dans le dom
-			
-			console.log(photoMediaDom);
 			galleryMedia.appendChild(photoMediaDom);
 		} else if ("video" in elem) {
 			const videoMedia = VideoTemplate(elem); // Òbjet avce les infos de la video

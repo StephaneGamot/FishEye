@@ -36,7 +36,7 @@ export function VideoTemplate ( data) {
 		const footerCard = document.createElement("div");
 		footerCard.classList.add("photograph-footerCard");
 
-		const photoName = document.createElement("p");
+		const photoName = document.createElement("h2");
 		photoName.classList.add("photograph-photoName");
 		photoName.textContent = title;
 
@@ -71,6 +71,7 @@ export function VideoTemplate ( data) {
 		const likesNumber = document.createElement("p");
 		likesNumber.classList.add("photograph-likesNumber");
 		likesNumber.textContent = likes;
+		likesNumber.setAttribute("aria-label", "bouton j'aime")
 
 		const littleHeart = document.createElement("img");
 		littleHeart.src = "../assets/images/myHeart.png";

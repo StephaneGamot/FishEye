@@ -24,7 +24,7 @@ export default function photographerProfilTemplate(data) {
 
 		// creation du titre (nom)
 		const h1 = document.createElement("h1");
-		h1.setAttribute("aria-label", title);
+		h1.setAttribute("aria-label", "nom du photographe: ");
 		h1.classList.add("photograph-h1");
 		h1.textContent = name;
 

@@ -20,41 +20,41 @@
 	<body>
 		<header>
 			<a href="../index.html">
-				<img src="../assets/images/logo.png" class="logo" alt="Logo de la Societe Fisheye" />
+				<img src="../assets/images/logo.png" role="img" class="logo" alt="Fisheye Home page" aria-label="Fisheye Home page" />
 			</a>
 		</header>
 		<main>
 			<section id="head-main">
-				<button type="button" id="btnContact" class="contact_button" aria-expanded="false" aria-controls="contact_modal">Contactez-moi</button>
+				<button type="button" aria-labelledby="coordonnees" id="btnContact" class="contact_button" aria-expanded="false" >Contactez-moi</button>
 
-				<div id="contact_modal" aria-hidden="true">
-					<div class="modal" role="dialog" aria-labelledby="modal">
+				<div id="contact_modal" >
+					<div class="modal"  aria-hidden="true" role="dialog" aria-labelledby="ModalH1" id="modalContact" >
 						<header>
 							<div id="ModalH1"><br /></div>
-							<img src="../assets/icons/close.svg" id="close-modal" alt="Croix permettant la fermeture du modal" />
+							<img src="../assets/icons/close.svg" id="close-modal" alt="Croix permettant la fermeture du modal"  />
 						</header>
-						<form>
+						<form  role="group" >
 							<div>
 								<label for="firstName">Prénom</label>
-								<input type="text" id="firstName" name="firstName" />
+								<input type="text" id="firstName" name="firstName" aria-required=true aria-invalid="true" />
 								<div id="firstNameErr"></div>
 							</div>
 							<div>
 								<label for="lastName">Nom</label>
-								<input type="text" id="lastName" name="lastName" />
+								<input type="text" id="lastName" name="lastName" aria-required=true />
 								<div id="lastNameErr"></div>
 							</div>
 							<div>
 								<label for="email">Email</label>
-								<input type="email" id="email" name="email" />
+								<input type="email" id="email" name="email" aria-required=true />
 								<div id="emailErr"></div>
 							</div>
 							<div>
 								<label for="message">Votre message</label>
-								<textarea name="textarea" rows="5" type="text" id="message"></textarea>
+								<textarea name="textarea" rows="5" type="text" id="message" aria-required=true ></textarea>
 								<div id="messageErr"></div>
 							</div>
-							<button type="submit" id="btnSend" class="contact_button">Envoyer</button>
+							<button type="submit" id="btnSend" class="contact_button" aria-label="Envoyer" >Envoyer</button>
 						</form>
 					</div>
 				</div>
@@ -65,7 +65,7 @@
 				<div class="dropdown-border">
 					<div class="dropdown">
 						<button type="button" id="dropdown-button-popular" class="dropdown-button" aria-label="Popularité">
-							Popularité<i id="arrow" class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+							Popularité<i id="arrow" class="fa-solid fa-chevron-down" aria-hidden="true" title="cliquer pour plus de choix"></i>
 						</button>
 						<div id="dropdown-menu">
 							<hr />
@@ -80,14 +80,14 @@
 			<section id="gallery-media" class="photograph-gallery"></section>
 
 			<section>
-				<div class="slider-container" aria-hidden="true" id="sliderContainer">
-					<button type="button" id="slider-btn-right" class="direction-btn right" aria-label="right arrow">
+				<div class="slider-container" aria-hidden="true" id="sliderContainer" role = "dialog" aria-label = "image closeup view">
+					<button type="button" id="slider-btn-right" class="direction-btn right" aria-label="Next image">
 						<i class="fa-solid fa-chevron-right fa-3x"></i>
 					</button>
-					<button type="button" id="slider-btn-left" class="direction-btn left" aria-label="left arrow">
+					<button type="button" id="slider-btn-left" class="direction-btn left" aria-label="Previous image">
 						<i class="fa-solid fa-chevron-left fa-3x"></i>
 					</button>
-					<button id="modal-close-slider" type="button" aria-label="Croix permettant la fermeture du modal" class="modal-close-slider">
+					<button id="modal-close-slider" type="button" aria-label="Close dialog" class="modal-close-slider">
 						<i class="fa-solid fa-xmark fa-3x"></i>
 					</button>
 

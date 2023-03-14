@@ -23,7 +23,7 @@ export default function photoTemplate(data) {
 		photoImg.classList.add("photograph-allMedia");
 		photoImg.setAttribute("src", pictureMedia);
 		photoImg.setAttribute("type", "jpg");
-		photoImg.setAttribute("alt", title);
+		photoImg.setAttribute("alt", "titre du media" + title);
 		photoImg.setAttribute("data-id", id);
 		
 		photoImg.addEventListener('click', function() {
