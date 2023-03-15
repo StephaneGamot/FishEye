@@ -65,7 +65,8 @@
 				<div class="dropdown-border">
 					<div class="dropdown">
 						<button type="button" id="dropdown-button-popular" class="dropdown-button" aria-label="Popularité">
-							Popularité<i id="arrow" class="fa-solid fa-chevron-down" aria-hidden="true" title="cliquer pour plus de choix"></i>
+							Popularité<i id="arrow" class="fa-solid fa-chevron-down" aria-hidden="true" title="Cliquer pour plus de choix"></i>
+							<span class="sr-only">Cliquer pour plus de choix</span>
 						</button>
 						<div id="dropdown-menu">
 							<hr />
@@ -82,13 +83,16 @@
 			<section>
 				<div class="slider-container" aria-hidden="true" id="sliderContainer" role = "dialog" aria-label = "image closeup view">
 					<button type="button" id="slider-btn-right" class="direction-btn right" aria-label="Next image">
-						<i class="fa-solid fa-chevron-right fa-3x"></i>
+						<i class="fa-solid fa-chevron-right fa-3x"  aria-hidden="true" title="Image suivante"></i>
+						<span class="sr-only">Image suivante</span>
 					</button>
 					<button type="button" id="slider-btn-left" class="direction-btn left" aria-label="Previous image">
-						<i class="fa-solid fa-chevron-left fa-3x"></i>
+						<i class="fa-solid fa-chevron-left fa-3x" aria-hidden="true" title="Image precedante"></i>
+						<span class="sr-only">Image précedante</span>
 					</button>
 					<button id="modal-close-slider" type="button" aria-label="Close dialog" class="modal-close-slider">
-						<i class="fa-solid fa-xmark fa-3x"></i>
+						<i class="fa-solid fa-xmark fa-3x" aria-hidden="true" title="ferme le modal"></i>
+						<span class="sr-only">Ferme le modal</span>
 					</button>
 
 					<div class="slide" id="slide"></div>
@@ -96,7 +100,9 @@
 			</section>
 
 			<div id="allLikes">
-				<div><span id="allLikesNumber"></span>&nbsp;<i class="fa-solid fa-heart"></i></div>
+				<div><span id="allLikesNumber"></span>&nbsp;<i class="fa-solid fa-heart" aria-hidden="true" title="Total Likes"></i>
+					<span class="sr-only">Total Likes</span>
+				</div>
 				<div><span id="dailyPrice"></span>€ / jour</div>
 			</div>
 		</main>

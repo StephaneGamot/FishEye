@@ -377,9 +377,8 @@ hr {
 	width: 100%;
 	height: auto;
 	max-height: 450px;
-	justify-content: center;
-	justify-content: center;
-	align-items: center;
+	
+	
 	padding: 0;
 	background: #111;
 	transition: transform 0.5s ease;

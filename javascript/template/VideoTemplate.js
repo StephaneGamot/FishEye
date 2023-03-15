@@ -1,6 +1,6 @@
 import {totalLikes} from "../utils/totalLikes.js"
 
-export function VideoTemplate ( data) {
+export function VideoTemplate ( data, index ) {
 	const {  id,title, video, likes} = data;
     const Video = `/assets/media/${video}`;
 
@@ -16,7 +16,8 @@ export function VideoTemplate ( data) {
 		// création de la photo avec son lien vers le modal
 		const mediaButton = document.createElement('a');
 		mediaButton.classList.add("modal-btn-slider");
-		mediaButton.setAttribute('tabindex', '0');
+		mediaButton.setAttribute("data-index", index +1);
+		//mediaButton.setAttribute('tabindex', '0');
 		
 		// création de la photo avec son lien vers le modal
 		const videoImg = document.createElement("video");
@@ -26,6 +27,7 @@ export function VideoTemplate ( data) {
 		videoImg.setAttribute("type", "video/mp4");
 		videoImg.setAttribute("alt", title);
 		videoImg.setAttribute("data-id", id);
+	
 		/*
 		videoImg.addEventListener('click', function() {
 			videoImg.classList.add('index');

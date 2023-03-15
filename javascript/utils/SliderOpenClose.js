@@ -13,8 +13,7 @@ const sliderWidth = sliderContainer.offsetWidth;
 
 //console.log(slides[0]);
 
-export function displayPhotosModalSlider() {
-
+export function displayPhotosModalSlider(index) {
 
 	mediaByFactory.forEach((elem) => {
 		if ("image" in elem) {
@@ -35,7 +34,9 @@ export function displayPhotosModalSlider() {
 	modalCloseSlider.addEventListener("click", closeModalSlider);
 	const sliderBtnLeft = document.getElementById("slider-btn-left");
 	const sliderBtnRight = document.getElementById("slider-btn-right");
-	let slideIndex = 0;
+	let slideIndex = parseInt(index) -1;
+	console.log(slideIndex);
+	showSlide(slideIndex);
 
 	function showSlide(n) {
 	  slide.style.transform = `translateX(-${n * 100}%)`;
@@ -69,10 +70,10 @@ export function displayPhotosModalSlider() {
 		console.log("fermé");
 	}
 }
-export function openModalSlider() {
+export function openModalSlider(index) {
 	sliderContainer.style.display = "block";
 	theSlide.innerHTML = ""; // Vider la galerie
 	slide.innerHTML = "";
 
-	displayPhotosModalSlider();
+	displayPhotosModalSlider(index);
 }

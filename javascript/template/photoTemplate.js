@@ -1,6 +1,6 @@
 import { totalLikes } from "../utils/totalLikes.js";
 
-export default function photoTemplate(data) {
+export default function photoTemplate(data, index) {
 	const { title, image, likes, id } = data;
 	const pictureMedia = `/assets/media/${image}`;
 
@@ -16,6 +16,7 @@ export default function photoTemplate(data) {
 		// création de la photo avec son lien vers le modal
 		const mediaButton = document.createElement('a');
 		mediaButton.classList.add("modal-btn-slider");
+		mediaButton.setAttribute("data-index", index +1) ;
 		//mediaButton.setAttribute('tabindex', '0');
 
 		const photoImg = document.createElement("img");
@@ -25,6 +26,7 @@ export default function photoTemplate(data) {
 		photoImg.setAttribute("type", "jpg");
 		photoImg.setAttribute("alt", "titre du media" + title);
 		photoImg.setAttribute("data-id", id);
+		
 		
 		photoImg.addEventListener('click', function() {
 			photoImg.classList.add("index");
@@ -74,6 +76,7 @@ export default function photoTemplate(data) {
 		littleHeart.src = "../assets/images/myHeart.png";
 		littleHeart.classList.add("photograph-littleHeart");
 		littleHeart.setAttribute("alt", "Petit coeur rouge permetant de like ou disliker");
+		littleHeart.setAttribute("title", "myLittleHeart");
 
 		// creation des appenchild de la gallery
 		articleMedia.appendChild(galleryPic);

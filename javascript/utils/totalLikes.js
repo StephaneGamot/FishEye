@@ -18,3 +18,6 @@ export const dailyPrice = photographerId[0].price;
 
 document.getElementById("allLikesNumber").innerHTML = totalLikes;
 document.getElementById("dailyPrice").innerHTML = dailyPrice;
+
+
+

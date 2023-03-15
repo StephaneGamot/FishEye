@@ -36,8 +36,9 @@ photographerMediaCreateDom();
 
 /**************************** Ouverture du modal / Slider ***************************************/
 const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");
-modalBtnSlider.forEach((image) => {
-	image.addEventListener("click", openModalSlider);	
+modalBtnSlider.forEach((image, index) => {
+	image.addEventListener("click", () => openModalSlider(image.dataset.index));	
+
 });
 
 
