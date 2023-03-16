@@ -17,9 +17,7 @@ export const recupMediaId = photographerEachIdMedia.map((item) => item.id); // c
 export const getMediasDataId = document.querySelectorAll(".photograph-allMedia"); // Noeud récuperant tous les medias
 export const totalMedia = getMediasDataId.length;
 export const indexElement = document.querySelector('.index');
-export const mediaByFactory = photographerEachIdMedia.map((data) =>
-	MediaFactory.createMediaFactory(data)
-); // idem mais via le factory
-
+export const mediaByFactory = photographerEachIdMedia.map((data) =>	MediaFactory.createMediaFactory(data)); // idem mais via le factory
+export const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");
 
 

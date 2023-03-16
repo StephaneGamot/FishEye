@@ -28,12 +28,12 @@ export function VideoTemplate ( data, index ) {
 		videoImg.setAttribute("alt", title);
 		videoImg.setAttribute("data-id", id);
 	
-		/*
+		
 		videoImg.addEventListener('click', function() {
 			videoImg.classList.add('index');
 			console.log("35");
 		  });
-*/
+
 		// création du bas de la carte avec son nom et ses likes
 		const footerCard = document.createElement("div");
 		footerCard.classList.add("photograph-footerCard");

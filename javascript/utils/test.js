@@ -1,83 +1,204 @@
-const slides = [...document.querySelectorAll(".slide")];
+export default function getSortBy(order = "date") {
+	// Trier les éléments en fonction de l'ordre choisi
+	const sortedMedia = photographerEachIdMedia.sort((a, b) => {
+	  if (order === "date") {
+		return new Date(b.date) - new Date(a.date);
+	  } else if (order === "title") {
+		return a.title.localeCompare(b.title);
+	  } else if (order === "likes") {
+		return b.likes - a.likes;
+	  } else {
+		console.log("Ordre inconnu, tri par défaut (date)");
+		return new Date(b.date) - new Date(a.date);
+	  }
+	});
+  
+	// Afficher les éléments triés
+	sortedMedia.forEach((elem, index) => {
+	  if ("image" in elem) {
+		const photoMedia = photoTemplate(elem, index);
+		const photoMediaDom = photoMedia.photoTemplateCardDom();
+		galleryMedia.appendChild(photoMediaDom);
+	  } else if ("video" in elem) {
+		const videoMedia = VideoTemplate(elem, index);
+		const videoMediaDom = videoMedia.videoTemplateCardDom();
+		galleryMedia.appendChild(videoMediaDom);
+	  } else {
+		console.log("IL Y A UN GROS BUG au niveau affichage Photo/video");
+	  }
+	});
+  
+	// Mettre à jour les index du data-order pour les boutons
+	modalBtnSlider.forEach((media, index) => {
+	  media.setAttribute("data-order", index);
+	  media.addEventListener("click", () => openModalSlider(media.dataset.order));
+	});
+  }
+  
 
-const sliderData = {
-	locked: false,
-	direction: 0,
-	slideOutIndex: 0,
-	slideInIndex: 0,
-};
 
-const directionButtons = [...document.querySelectorAll(".direction-btn")];
 
-directionButtons.forEach((btn) => btn.addEventListener("click", handleClick));
 
-function handleClick(e) {
-	if (sliderData.locked) return;
-	sliderData.locked = true;
 
-	getDirection(e.target);
 
-	slideOut();
-}
 
-function getDirection(btn) {
-	sliderData.direction = btn.className.includes("right") ? 1 : -1;
 
-	sliderData.slideOutIndex = slides.findIndex((slide) => slide.classList.contains("active"));
+  import { photographerEachIdMedia } from "../Config/GetAllData.js";
+import { theSlide, mediaByFactory, getMediasDataId } from "../Config/GetAllData.js";
+import { slides, photoImgs, media, ID } from "../Config/GetAllData.js";
+import SliderPhotoTemplate from "../template/SliderPhotoTemplate.js";
+import SliderVideoTemplate from "../template/SliderVideoTemplate.js";
+import photoTemplate from "../template/photoTemplate.js";
+import PhotoModels from "../models/PhotoModels.js";
+import getSortBy from "../Config/getSortBy.js";
+import sortByLike from "../utils/sortByLike.js"
 
-	if (sliderData.slideOutIndex + sliderData.direction > slides.length - 1) {
-		sliderData.slideInIndex = 0;
-	} else if (sliderData.slideOutIndex + sliderData.direction < 0) {
-		sliderData.slideInIndex = slides.length - 1;
-	} else {
-		sliderData.slideInIndex = sliderData.slideOutIndex + sliderData.direction;
+const sliderContainer = document.getElementById("sliderContainer");
+const slide = document.getElementById("slide");
+const modalCloseSlider = document.getElementById("modal-close-slider");
+const sliderWidth = sliderContainer.offsetWidth;
+const mainWhite = document.getElementById("white");
+ 
+export function displayPhotosModalSlider(index) {
+	
+
+	mediaByFactory.forEach((elem) => {
+		if ("image" in elem) {
+			const photoMedia = SliderPhotoTemplate(elem); // Òbjet avce les infos de la photos
+			const photoMediaDom = photoMedia.createImgElement(); // la phot dans le dom
+			//photoMediaDom.setAttribute("data-index", index +1) ;
+			slide.appendChild(photoMediaDom);
+		} else if ("video" in elem) {
+			const videoMedia = SliderVideoTemplate(elem); // Òbjet avce les infos de la photos
+			const videoMediaDom = videoMedia.carrouselVideoDom(); //
+			//videoMediaDom.setAttribute("data-index", index +1) ;
+			slide.appendChild(videoMediaDom);
+		} else {
+			console.log("IL Y A UN GROS BUG au niveau affichage Photo/video");
+		}
+	});
+
+	const modalCloseSlider = document.getElementById("modal-close-slider");
+	modalCloseSlider.addEventListener("click", closeModalSlider);
+	const sliderBtnLeft = document.getElementById("slider-btn-left");
+	const sliderBtnRight = document.getElementById("slider-btn-right");
+	let slideIndex = parseInt(index)-1 ;
+	console.log(slideIndex);
+	showSlide(slideIndex);
+
+	function showSlide(n) {
+	  slide.style.transform = `translateX(-${n * 100}%)`;
+	}
+	
+	function prevSlide() {
+	  if (slideIndex === 0) {
+		slideIndex = slide.children.length - 1;
+	  } else {
+		slideIndex--;
+	  }
+	  showSlide(slideIndex);
+	}
+	
+	function nextSlide() {
+	  if (slideIndex === slide.children.length - 1) {
+		slideIndex = 0;
+	  } else {
+		slideIndex++;
+	  }
+	  showSlide(slideIndex);
+	}
+	
+	sliderBtnLeft.addEventListener('click', prevSlide);
+	sliderBtnRight.addEventListener('click', nextSlide);
+	function closeModalSlider() {
+		sliderContainer.style.display = "none";
+		theSlide.innerHTML = ""; // Vider la galerie
+		slide.innerHTML = "";
 	}
 }
-
-function slideOut() {
-	slideAnimation({
-		el: slides[sliderData.slideInIndex],
-		props: {
-			display: "flex",
-			transform: `translateX(${sliderData.direction < 0 ? "100%" : "-100%"})`,
-			opacity: 0,
-		},
-	});
-
-	slides[sliderData.slideOutIndex].addEventListener("transitionend", slideIn);
-
-	slideAnimation({
-		el: slides[sliderData.slideOutIndex],
-		props: {
-			transition: "transform 0.4s cubic-bezier(0.74, -0.34, 1, 1.19), opacity 0.4s ease-out",
-			transform: `translateX(${sliderData.direction < 0 ? "-100%" : "100%"})`,
-			opacity: 0,
-		},
-	});
+export function openModalSlider(index) {
+	sliderContainer.style.display = "block";
+	theSlide.innerHTML = ""; // Vider la galerie
+	slide.innerHTML = "";
+	displayPhotosModalSlider(index);
 }
 
-function slideAnimation(animationObject) {
-	for (const prop in animationObject.props) {
-		animationObject.el.style[prop] = animationObject.props[prop];
-	}
+
+
+
+
+
+
+
+
+export default function sortByLike() {
+	photographerEachIdMedia.sort((a, b) => {
+		if (a.likes < b.likes) {
+		  return -1;
+		} else if (a.likes > b.likes) {
+		  return 1;
+		} else {
+		  return 0;
+		}
+	  }).forEach((elem, index) => {
+		elem["data-order"] = index + 1; // ajouter une propriété "data-order" à chaque élément
+		if ("image" in elem) {
+		  const photoMedia = photoTemplate(elem, index); // passer l'index en paramètre
+		  const photoMediaDom = photoMedia.photoTemplateCardDom();
+		  galleryMedia.appendChild(photoMediaDom);
+		} else if ("video" in elem) {
+		  const videoMedia = VideoTemplate(elem);
+		  const videoMediaDom = videoMedia.videoTemplateCardDom();
+		  galleryMedia.appendChild(videoMediaDom);
+		} else {
+		  console.log("IL Y A UN GROS BUG au niveau affichage Photo/video");
+		}
+	  });
 }
 
-function slideIn(e) {
-	slideAnimation({
-		el: slides[sliderData.slideInIndex],
-		props: {
-			transition: "transform 0.4s ease-out, opacity 0.6s ease-out",
-			transform: "translateX(0%)",
-			opacity: 1,
-		},
-	});
-	slides[sliderData.slideInIndex].classList.add("active");
 
-	slides[sliderData.slideOutIndex].classList.remove("active");
-	e.target.removeEventListener("transitionend", slideIn);
-	slides[sliderData.slideOutIndex].style.display = "none";
 
-	setTimeout(() => {
-		sliderData.locked = false;
-	}, 400);
+
+
+
+
+import { photographerEachIdMedia, galleryMedia } from "../Config/GetAllData.js";
+import photoTemplate from "../template/photoTemplate.js";
+import { VideoTemplate } from "../template/VideoTemplate.js";
+import { openModalSlider } from "./SliderOpenClose.js";
+
+export let newSortByLike;
+
+export function sortByLike() {
+
+	galleryMedia.innerHTML = ""; // Vider la galerie
+
+	photographerEachIdMedia.sort((a, b) => {
+		if (a.likes < b.likes) {
+		  return -1;
+		} else if (a.likes > b.likes) {
+		  return 1;
+		} else {
+		  return 0;
+		}
+	  }).forEach((elem, index) => {
+		elem["data-order"] = index + 1; // j'ajoute une propriété "data-order" à chaque élément
+		if ("image" in elem) {
+		  const photoMedia = photoTemplate(elem, index); // passer l'index en paramètre
+		  const photoMediaDom = photoMedia.photoTemplateCardDom();
+		  galleryMedia.appendChild(photoMediaDom);
+		} else if ("video" in elem) {
+		  const videoMedia = VideoTemplate(elem);
+		  const videoMediaDom = videoMedia.videoTemplateCardDom();
+		  galleryMedia.appendChild(videoMediaDom);
+		} else {
+		  console.log("IL Y A UN GROS BUG au niveau affichage Photo/video");
+		}
+	  });
+	  const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");
+modalBtnSlider.forEach((media, index) => {	
+	media.addEventListener("click", () => openModalSlider(media.dataset.index));	
+});
+console.log(photographerEachIdMedia);
+newSortByLike = photographerEachIdMedia;
 }

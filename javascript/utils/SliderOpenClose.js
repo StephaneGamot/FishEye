@@ -1,4 +1,4 @@
-import { photographerEachIdMedia } from "../Config/GetAllData.js";
+import { photographerEachIdMedia, galleryMedia } from "../Config/GetAllData.js";
 import { theSlide, mediaByFactory, getMediasDataId } from "../Config/GetAllData.js";
 import { slides, photoImgs, media, ID } from "../Config/GetAllData.js";
 import SliderPhotoTemplate from "../template/SliderPhotoTemplate.js";
@@ -14,8 +14,8 @@ const sliderWidth = sliderContainer.offsetWidth;
 //console.log(slides[0]);
 
 export function displayPhotosModalSlider(index) {
-
-	mediaByFactory.forEach((elem) => {
+	
+	photographerEachIdMedia.forEach((elem) => {
 		if ("image" in elem) {
 			const photoMedia = SliderPhotoTemplate(elem); // Òbjet avce les infos de la photos
 			const photoMediaDom = photoMedia.createImgElement(); // la phot dans le dom
@@ -37,7 +37,6 @@ export function displayPhotosModalSlider(index) {
 	let slideIndex = parseInt(index) -1;
 	console.log(slideIndex);
 	showSlide(slideIndex);
-
 	function showSlide(n) {
 	  slide.style.transform = `translateX(-${n * 100}%)`;
 	}
@@ -74,6 +73,6 @@ export function openModalSlider(index) {
 	sliderContainer.style.display = "block";
 	theSlide.innerHTML = ""; // Vider la galerie
 	slide.innerHTML = "";
-
+console.log("AZ")
 	displayPhotosModalSlider(index);
 }

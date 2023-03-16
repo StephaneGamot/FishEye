@@ -9,7 +9,7 @@ import SliderVideoTemplate from "../template/SliderVideoTemplate.js";
 import SliderPhotoTemplate from "../template/SliderPhotoTemplate.js";
 import { modalBtn, modal, displayModal, ModalContactForm } from "../utils/ModalContactForm.js";
 import sortByDate from "../utils/sortByDate.js";
-import sortByLike from "../utils/sortByLike.js";
+import {sortByLike, newSortByLike} from "../utils/sortByLike.js";
 import { sortByName } from "../utils/sortByName.js";
 import { urlparam, ID, dataApi, photographers, media, galleryMedia, theSlide, slides, getMediasDataId, photoImgs  } from "../Config/GetAllData.js";
 import photographerMediaCreateDom from "../Config/photographerMediaCreateDom.js";
@@ -36,9 +36,8 @@ photographerMediaCreateDom();
 
 /**************************** Ouverture du modal / Slider ***************************************/
 const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");
-modalBtnSlider.forEach((image, index) => {
-	image.addEventListener("click", () => openModalSlider(image.dataset.index));	
-
+modalBtnSlider.forEach((media, index) => {	
+	media.addEventListener("click", () => openModalSlider(media.dataset.index));	
 });
 
 
@@ -47,3 +46,5 @@ modalBtnSlider.forEach((image, index) => {
 allPhotographeLikes();
 
 /*********************** INCREMENTER LES LIKES ******************************************/
+//sortByLike();
+//console.log(newSortByLike);

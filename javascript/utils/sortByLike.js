@@ -1,32 +1,40 @@
 import { photographerEachIdMedia, galleryMedia } from "../Config/GetAllData.js";
 import photoTemplate from "../template/photoTemplate.js";
 import { VideoTemplate } from "../template/VideoTemplate.js";
+import { openModalSlider } from "./SliderOpenClose.js";
 
-export default function sortByLike() {
-	photographerEachIdMedia.sort((a, b) => {
-		if (a.likes < b.likes) {
-			return -1;
-		} else if (a.likes > b.likes) {
-			return 1;
-		} else {
-			return 0;
-		}
-	});
-	
+export let newSortByLike;
+
+export function sortByLike() {
+
 	galleryMedia.innerHTML = ""; // Vider la galerie
 
-	photographerEachIdMedia.forEach((elem) => {
-		if ("image" in elem) {
-			const photoMedia = photoTemplate(elem); // Òbjet avce les infos de la photos
-			const photoMediaDom = photoMedia.photoTemplateCardDom(); // la phot dans le dom
-			//console.log(photoMediaDom);
-			galleryMedia.appendChild(photoMediaDom);
-		} else if ("video" in elem) {
-			const videoMedia = VideoTemplate(elem); // Òbjet avce les infos de la video
-			const videoMediaDom = videoMedia.videoTemplateCardDom(); // la video dans le dom
-			galleryMedia.appendChild(videoMediaDom);
+	photographerEachIdMedia.sort((a, b) => {
+		if (a.likes < b.likes) {
+		  return -1;
+		} else if (a.likes > b.likes) {
+		  return 1;
 		} else {
-			console.log("IL Y A UN GROS BUG au niveau affichage Photo/video");
+		  return 0;
 		}
-	});
+	  }).forEach((elem, index) => {
+		elem["data-order"] = index + 1; // j'ajoute une propriété "data-order" à chaque élément
+		if ("image" in elem) {
+		  const photoMedia = photoTemplate(elem, index); // passer l'index en paramètre
+		  const photoMediaDom = photoMedia.photoTemplateCardDom();
+		  galleryMedia.appendChild(photoMediaDom);
+		} else if ("video" in elem) {
+		  const videoMedia = VideoTemplate(elem, index);
+		  const videoMediaDom = videoMedia.videoTemplateCardDom();
+		  galleryMedia.appendChild(videoMediaDom);
+		} else {
+		  console.log("IL Y A UN GROS BUG au niveau affichage Photo/video");
+		}
+	  });
+	  const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");
+modalBtnSlider.forEach((media, index) => {	
+	media.addEventListener("click", () => openModalSlider(media.dataset.index));	
+});
+console.log(photographerEachIdMedia);
+newSortByLike = photographerEachIdMedia;
 }

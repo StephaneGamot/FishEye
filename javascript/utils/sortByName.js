@@ -1,8 +1,11 @@
 import { photographerEachIdMedia, galleryMedia } from "../Config/GetAllData.js";
 import photoTemplate from "../template/photoTemplate.js";
 import { VideoTemplate } from "../template/VideoTemplate.js";
+import { openModalSlider } from "./SliderOpenClose.js";
 
+console.log(photographerEachIdMedia)
 export async function sortByName() {
+	galleryMedia.innerHTML = ""; // Vider la galerie
 	photographerEachIdMedia.sort((a, b) => {
 		if (a.title < b.title) {
 			return -1;
@@ -11,22 +14,23 @@ export async function sortByName() {
 		} else {
 			return 0;
 		}
-	});
-	
-	galleryMedia.innerHTML = ""; // Vider la galerie
-
-	photographerEachIdMedia.forEach((elem) => {
+	}).forEach((elem, index) => {
+		elem["data-order"] = index + 1; // ajouter une propriété "data-order" à chaque élément
 		if ("image" in elem) {
-			const photoMedia = photoTemplate(elem); // Òbjet avce les infos de la photos
-			const photoMediaDom = photoMedia.photoTemplateCardDom(); // la phot dans le dom
-			//console.log(photoMediaDom);
-			galleryMedia.appendChild(photoMediaDom);
+		  const photoMedia = photoTemplate(elem, index); // passer l'index en paramètre
+		  const photoMediaDom = photoMedia.photoTemplateCardDom();
+		  galleryMedia.appendChild(photoMediaDom);
 		} else if ("video" in elem) {
-			const videoMedia = VideoTemplate(elem); // Òbjet avce les infos de la video
-			const videoMediaDom = videoMedia.videoTemplateCardDom(); // la video dans le dom
-			galleryMedia.appendChild(videoMediaDom);
+		  const videoMedia = VideoTemplate(elem, index);
+		  const videoMediaDom = videoMedia.videoTemplateCardDom();
+		  galleryMedia.appendChild(videoMediaDom);
 		} else {
 			console.log("IL Y A UN GROS BUG au niveau affichage Photo/video");
-		}
-	});
-}
+		  }
+		});
+		const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");
+  modalBtnSlider.forEach((media, index) => {	
+	  media.addEventListener("click", () => openModalSlider(media.dataset.index));	
+  });
+  
+  }
