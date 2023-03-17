@@ -1,9 +1,8 @@
 export default function SliderPhotoTemplate(data) {
 	const { title, image, id } = data;
 	const carrouselMedia = `/assets/media/${image}`;
-	//const indexElement = document.querySelector('.index');
 
-	function createImgElement() {	
+	function createImgElement() {
 		const imgSliderDisplay = document.createElement("img");
 		imgSliderDisplay.classList.add("slider-img");
 		imgSliderDisplay.classList.add("photograph-allMedia");
@@ -11,7 +10,8 @@ export default function SliderPhotoTemplate(data) {
 		imgSliderDisplay.setAttribute("alt", title);
 		imgSliderDisplay.setAttribute("data-id", id);
 		imgSliderDisplay.setAttribute("type", "jpg");
-
+		const imgSliderDisplayTitle = document.createElement("h2");
+		imgSliderDisplayTitle.textContent = title;
 		return imgSliderDisplay;
 	}
 
@@ -19,6 +19,7 @@ export default function SliderPhotoTemplate(data) {
 		title,
 		image,
 		id,
+	
 		createImgElement,
 	};
 }
