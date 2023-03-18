@@ -1,37 +1,29 @@
 export default class Api {
 	constructor() {
-		this.url = "../data/photographers.json";
+		this.url = "../data/photographers.json"; // me permet d'iniatialiser l'url
 	}
 
-	async getPhotographers() {
+	async getPhotographers() {  // methode asynchrome pour récuperer les photographes via l'API
 		const response = await fetch(this.url);
 		const data = await response.json();
-		//console.log(data);
 		return data;
 	}
 
-	async getMediasById(id) {
+	async getMediasById(id) {// methode asynchrome pour récuperer les données ddesmédias de chaque photographe via l'API
 		const response = await fetch(this.url);
 		const data = await response.json();
 		const photographersMedia = data.media;
 		const photographerEachIdMedia = photographersMedia.filter(
 			(elem) => elem.photographerId == id
 		);
-		//console.log(photographerEachIdMedia);
-		//console.log(photographersMedia);
 		return data;
 	}
 
-	async getPhotographerById(id) {
+	async getPhotographerById(id) { // methode asynchrome pour récuperer les données de chaques photographes via l'API
 		const response = await fetch(this.url);
 		const data = await response.json();
 		const photographersData = data.photographers;
 		const photographerId = photographersData.filter((elem) => elem.id == id);
-
-		//console.log(photographerId);
-		//console.log(data);
-		//console.log(photographersData);
-
 		return data;
 	}
 }

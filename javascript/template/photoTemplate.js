@@ -67,12 +67,12 @@ export default function photoTemplate(data, index) {
 
 		//likesNumber.textContent = likes;
 
-		const likesNumber = document.createElement("p");
+		const likesNumber = document.createElement("h3");
 		likesNumber.classList.add("photograph-likesNumber");
 		likesNumber.textContent = theLikes;
 
 		const littleHeart = document.createElement("img");
-		littleHeart.setAttribute("id", "myLittleHeart");
+		//littleHeart.setAttribute("id", "myLittleHeart");
 		littleHeart.src = "../assets/images/myHeart.png";
 		littleHeart.classList.add("photograph-littleHeart");
 		littleHeart.setAttribute("alt", "Petit coeur rouge permetant de like ou disliker");

@@ -13,3 +13,5 @@ export function dropdownMenuSelect() {
 		arrow.style.transform = "rotate(0deg)";
 	}
 }
+
+// fonction de Tri qui permet de s'ouvrir en dropdown & fleche qui bouge

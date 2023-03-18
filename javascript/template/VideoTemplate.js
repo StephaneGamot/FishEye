@@ -70,7 +70,7 @@ export function VideoTemplate ( data, index ) {
 		//likesNumber.textContent = likes;
 		
 
-		const likesNumber = document.createElement("p");
+		const likesNumber = document.createElement("h3");
 		likesNumber.classList.add("photograph-likesNumber");
 		likesNumber.textContent = likes;
 		likesNumber.setAttribute("aria-label", "bouton j'aime")

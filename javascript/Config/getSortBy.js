@@ -1,3 +1,6 @@
+
+/*
+
 import { photographerEachIdMedia, galleryMedia, modalBtnSlider } from "./GetAllData.js";
 import photoTemplate from "../template/photoTemplate.js";
 import { VideoTemplate } from "../template/VideoTemplate.js";
@@ -24,3 +27,4 @@ export default function getSortBy() {
   
   });
 }
+*/

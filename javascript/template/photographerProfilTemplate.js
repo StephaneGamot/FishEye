@@ -6,51 +6,42 @@ export default function photographerProfilTemplate(data) {
 	function getPhotographerCardDOM() {
 		const article = document.createElement("article");
 
-		// reation de la section d'entête
-		const sectionHead = document.createElement("section");
+		
+		const sectionHead = document.createElement("section");  // Creation de la section d'entête
 		sectionHead.classList.add("photograph-header");
 
-		// creation de la div de gauche (dans l'entête)
-		const divLeft = document.createElement("div");
+		const divLeft = document.createElement("div");          // creation de la div de gauche (dans l'entête)
 		divLeft.classList.add("photograph-divLeft");
 
-		// creation de la div du centre (dans l'entête)
-		const divCenter = document.createElement("div");
+		const divCenter = document.createElement("div");        // creation de la div du centre (dans l'entête)
 		divCenter.classList.add("photograph-divCenter");
 
-		// creation de la div de droite (dans l'entête)
-		const divRight = document.createElement("div");
+		const divRight = document.createElement("div");         // creation de la div de droite (dans l'entête)
 		divRight.classList.add("photograph-divRight");
 
-		// creation du titre (nom)
-		const h1 = document.createElement("h1");
+		const h1 = document.createElement("h1");                // creation du titre (nom)
 		h1.setAttribute("aria-label", "nom du photographe: ");
 		h1.classList.add("photograph-h1");
 		h1.textContent = name;
 
-		// creation de la ville + pays
-		const ville = document.createElement("h2");
+		const ville = document.createElement("h2");             // creation de la ville + pays
 		ville.textContent = city + ", " + country;
 		ville.classList.add("photographer-city");
 
-		// creation du slogan
-		const slogan = document.createElement("p");
+		const slogan = document.createElement("p");             // creation du slogan
 		slogan.textContent = tagline;
 		slogan.classList.add("photograph-slogan");
 
-		// creation du boutton (div centrale)
-		const button = document.getElementById("btnContact");
+		const button = document.getElementById("btnContact");   // creation du boutton (div centrale)
 		button.classList.add("contact_button");
 		button.textContent = "Contactez-moi";
 
-		// creation du boutton (div de droite)
-		const photo = document.createElement("img");
+		const photo = document.createElement("img");            // creation du boutton (div de droite)
 		photo.classList.add("photograph-pic");
 		photo.setAttribute("src", picture);
 		photo.setAttribute("alt", name);
 
-		// creation des appenchild de la section d'entête
-		article.appendChild(sectionHead);
+		article.appendChild(sectionHead);                       // creation des appenchild de la section d'entête
 		sectionHead.appendChild(divLeft);
 		divLeft.appendChild(h1);
 		divLeft.appendChild(ville);

@@ -16,35 +16,22 @@ import photographerMediaCreateDom from "../Config/photographerMediaCreateDom.js"
 import { allPhotographeLikes } from "../utils/totalLikes.js";
 import silverTemplate from "../template/sliderTemplate.js";
 import photographerCreateDom from "../utils/photographerCreateDom.js"
-/**************************** RECUPERATION DES DONNEES ***************************************/
 
-photographerCreateDom();
 
-/**************************** BOUTON CONTACT ***************************************/
+photographerCreateDom();                                                                 // Récupération des données pour les photographes
 
-modalBtn.addEventListener("click", displayModal);
+modalBtn.addEventListener("click", displayModal);                                        // bouton qui enclenche le modal de contact
 
-/**************************** TRI ***************************************/
+document.getElementById("dropdown-button-title").addEventListener("click", sortByName);  // Tri des photos par ordre alphabétique
+document.getElementById("dropdown-button-popular").addEventListener("click", sortByLike);// Tri des photos par nb de coeur du - au +
+document.getElementById("dropdown-button-date").addEventListener("click", sortByDate);   // Tri des photos par date du + ancien au + recent
 
-document.getElementById("dropdown-button-title").addEventListener("click", sortByName);
-document.getElementById("dropdown-button-popular").addEventListener("click", sortByLike);
-document.getElementById("dropdown-button-date").addEventListener("click", sortByDate);
+photographerMediaCreateDom();                                                            // Appel de ma fonction pour la gallerie de photo
 
-/**************************** GALLERY ***************************************/
-
-photographerMediaCreateDom();
-
-/**************************** Ouverture du modal / Slider ***************************************/
-const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");
+const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");                   // Ouverture du modal / Slider 
 modalBtnSlider.forEach((media, index) => {	
 	media.addEventListener("click", () => openModalSlider(media.dataset.index));	
 });
 
+allPhotographeLikes();                                                                   // Tous les Likes en bas de page
 
-/**************************** Tous les Likes en bas de page ***************************************/
-
-allPhotographeLikes();
-
-/*********************** INCREMENTER LES LIKES ******************************************/
-//sortByLike();
-//console.log(newSortByLike);

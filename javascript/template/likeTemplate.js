@@ -10,3 +10,5 @@ export function likePlusMinus(data) {
 	}
 	likesNumber.textContent = theLikes;
 }
+
+// Fonction qui me permet d'incrémenter ou de decrement les likes de chaques photos

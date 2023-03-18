@@ -11,6 +11,7 @@ export default function SliderVideoTemplate(data) {
 		videoSliderDisplay.setAttribute("alt", title);
 		videoSliderDisplay.setAttribute("data-id", id);
 		videoSliderDisplay.setAttribute("type", "video/mp4");
+		videoSliderDisplay.setAttribute("controls", "");
 
 		return videoSliderDisplay;
 	}

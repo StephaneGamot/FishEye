@@ -39,7 +39,7 @@ export function displayPhotosModalSlider(index) {
 	mediaName.textContent = sliderImgTitle;
 	const sliderImgTitleLength = photographerEachIdMedia.length;
 	let newMediaIndexParse = parseInt(sliderImgTitleLength);
-console.log(newMediaIndexParse);
+
 	showSlide(slideIndex);
 	function showSlide(n) {
 		slide.style.transform = `translateX(-${n * 100}%)`;
@@ -58,50 +58,32 @@ console.log(newMediaIndexParse);
 
 	function prevName() {
 		clickCount++;
-		if (index === 0) {
+		if (index == 0) {
 			index = newMediaIndexParse - 1;
-			console.log("1");
 		} else if (clickCount === 1 && index != 0) {
 			index -= 2;
-			console.log("2");
 		} else {
 			index -= 1;
-			console.log("3");
 		}
+
 		if (index >= 0 && index < photographerEachIdMedia.length) {  // me permet de vérifiez l'index si il est valide avant de mettre à jour 
 			mediaName.textContent = photographerEachIdMedia[index].title;
-			console.log("4");
-			console.log(index);
-			console.log(slideIndex);
 		}
 	}
 
 	function nextSlide() {
 		if (slideIndex === slide.children.length - 1) {
 			slideIndex = 0;
-			
 		} else {
 			slideIndex++;
 		}
 		showSlide(slideIndex);
 	}
-
 	function nextName() {
-		if (index === newMediaIndexParse) {
+		if (index === slide.children.length - 1) {
 			index = 0;
-			mediaName.textContent = photographerEachIdMedia[index].title;
-			console.log("5");
-			console.log(index);
-			console.log(newMediaIndexParse);
-			console.log(currentMediaIndex);
-
-
 		} else {
 			mediaName.textContent = photographerEachIdMedia[index++].title;
-			console.log("6");
-			console.log(index);
-			console.log(slideIndex);
-			console.log(currentMediaIndex);
 		}
 	}
 

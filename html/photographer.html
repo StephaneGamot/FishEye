@@ -19,96 +19,109 @@
 	</head>
 	<body>
 		<header>
-			<a href="../index.html">
-				<img src="../assets/images/logo.png" role="img" class="logo" alt="Fisheye Home page" aria-label="Fisheye Home page" />
-			</a>
-		</header>
+			<a href="../index.html" aria-label="Fisheye Home page">
+				<img src="../assets/images/logo.png" class="logo" alt="Fisheye Home page" />
+			  </a>
+		  </header>
+		  
 		<main>
 			<section id="head-main">
-				<button type="button" aria-labelledby="coordonnees" id="btnContact" class="contact_button" aria-expanded="false" >Contactez-moi</button>
-
-				<div id="contact_modal" >
-					<div class="modal"  aria-hidden="true" role="dialog" aria-labelledby="ModalH1" id="modalContact" >
-						<header>
-							<div id="ModalH1"><br /></div>
-							<img src="../assets/icons/close.svg" id="close-modal" alt="Croix permettant la fermeture du modal"  />
-						</header>
-						<form  role="group" >
-							<div>
-								<label for="firstName">Prénom</label>
-								<input type="text" id="firstName" name="firstName" aria-required=true aria-invalid="true" />
-								<div id="firstNameErr"></div>
-							</div>
-							<div>
-								<label for="lastName">Nom</label>
-								<input type="text" id="lastName" name="lastName" aria-required=true />
-								<div id="lastNameErr"></div>
-							</div>
-							<div>
-								<label for="email">Email</label>
-								<input type="email" id="email" name="email" aria-required=true />
-								<div id="emailErr"></div>
-							</div>
-							<div>
-								<label for="message">Votre message</label>
-								<textarea name="textarea" rows="5" type="text" id="message" aria-required=true ></textarea>
-								<div id="messageErr"></div>
-							</div>
-							<button type="submit" id="btnSend" class="contact_button" aria-label="Envoyer" >Envoyer</button>
-						</form>
-					</div>
+				<button type="button" aria-label="coordonnees" id="btnContact" class="contact_button" aria-expanded="false">Contactez-moi</button>
+			  
+				<div id="contact_modal">
+				  <div class="modal" aria-hidden="true" role="dialog" aria-labelledby="ModalH1" id="modalContact">
+					<header>
+					  <div id="ModalH1"><br /></div>
+					  <img src="../assets/icons/close.svg" id="close-modal" alt="Croix permettant la fermeture du modal" />
+					</header>
+					<form role="group">
+					  <div>
+						<label for="firstName">Prénom</label>
+						<input type="text" id="firstName" name="firstName" aria-required="true" aria-invalid="true" required />
+						<div id="firstNameErr" role="alert" aria-live="assertive"></div>
+					  </div>
+					  <div>
+						<label for="lastName">Nom</label>
+						<input type="text" id="lastName" name="lastName" aria-required="true" required />
+						<div id="lastNameErr" role="alert" aria-live="assertive"></div>
+					  </div>
+					  <div>
+						<label for="email">Email</label>
+						<input type="email" id="email" name="email" aria-required="true" required />
+						<div id="emailErr" role="alert" aria-live="assertive"></div>
+					  </div>
+					  <div>
+						<label for="message">Votre message</label>
+						<textarea name="textarea" rows="5" type="text" id="message" aria-required="true" required></textarea>
+						<div id="messageErr" role="alert" aria-live="assertive"></div>
+					  </div>
+					  <button type="submit" id="btnSend" class="contact_button" aria-label="Envoyer">Envoyer</button>
+					</form>
+				  </div>
 				</div>
-			</section>
+			  </section>
+			  
 
-			<div id="selector">
+			  <div id="selector">
 				<h3>Trier par</h3>
 				<div class="dropdown-border">
-					<div class="dropdown">
-						<button type="button" id="dropdown-button-popular" class="dropdown-button" aria-label="Popularité">
-							Popularité<i id="arrow" class="fa-solid fa-chevron-down" aria-hidden="true" title="Cliquer pour plus de choix"></i>
-							<span class="sr-only">Cliquer pour plus de choix</span>
-						</button>
-						<div id="dropdown-menu">
-							<hr />
-							<button type="button" id="dropdown-button-date" class="dropdown-button" aria-label="Date">Date</button>
-							<hr />
-							<button type="button" id="dropdown-button-title" class="dropdown-button" aria-label="Titre">Titre</button>
-						</div>
+				  <div class="dropdown">
+					<button type="button" id="dropdown-button-popular" class="dropdown-button" aria-haspopup="true" aria-expanded="false" aria-label="Popularité">
+					  Popularité<i id="arrow" class="fa-solid fa-chevron-down" aria-hidden="true" title="Cliquer pour plus de choix"></i>
+					  <span class="sr-only">Cliquer pour plus de choix</span>
+					</button>
+					<div id="dropdown-menu" role="menu">
+					  <hr />
+					  <button type="button" id="dropdown-button-date" class="dropdown-button" role="menuitem" aria-label="Date">Date</button>
+					  <hr />
+					  <button type="button" id="dropdown-button-title" class="dropdown-button" role="menuitem" aria-label="Titre">Titre</button>
 					</div>
+				  </div>
 				</div>
-			</div>
+			  </div>
+			  
 
-			<section id="gallery-media" class="photograph-gallery" ></section>
+			  <section id="gallery-media" class="photograph-gallery" aria-labelledby="gallery-heading" role="region">
+				<h2 id="gallery-heading" class="sr-only">Galerie de photos</h2>
+			  </section>
+			  
 
-			<section>
-				<div id="whiteBG" >
-					<button type="button" id="slider-btn-right" class="direction-btn right" aria-label="Next image">
-						<i class="fa-solid fa-chevron-right fa-3x"  aria-hidden="true" title="Image suivante"></i>
-						<span class="sr-only">Image suivante</span>
-					</button>
-					<button type="button" id="slider-btn-left" class="direction-btn left" aria-label="Previous image">
-						<i class="fa-solid fa-chevron-left fa-3x" aria-hidden="true" title="Image precedante"></i>
-						<span class="sr-only">Image précedante</span>
-					</button>
-					<button id="modal-close-slider" type="button" aria-label="Close dialog" class="modal-close-slider">
-						<i class="fa-solid fa-xmark fa-3x" aria-hidden="true" title="ferme le modal"></i>
-						<span class="sr-only">Ferme le modal</span>
-					</button>
-				<div class="slider-container" aria-hidden="true" id="sliderContainer" role = "dialog" aria-label = "image closeup view">
-					
-					
-
+			  <section>
+				<div id="whiteBG">
+				  <button type="button" id="slider-btn-right" class="direction-btn right" aria-label="Image suivante">
+					<i class="fa-solid fa-chevron-right fa-3x" aria-hidden="true" title="Image suivante"></i>
+					<span class="sr-only">Image suivante</span>
+				  </button>
+				  <button type="button" id="slider-btn-left" class="direction-btn left" aria-label="Image précédente">
+					<i class="fa-solid fa-chevron-left fa-3x" aria-hidden="true" title="Image précédente"></i>
+					<span class="sr-only">Image précédente</span>
+				  </button>
+				  <button id="modal-close-slider" type="button" aria-label="Fermer le dialogue" class="modal-close-slider">
+					<i class="fa-solid fa-xmark fa-3x" aria-hidden="true" title="Fermer le modal"></i>
+					<span class="sr-only">Fermer le modal</span>
+				  </button>
+				  <div class="slider-container" aria-hidden="true" id="sliderContainer" role="dialog" aria-label="Vue agrandie de l'image">
 					<div class="slide" id="slide"></div>
 					<div id="mediaName" class="slider-media-title"></div>
-				</div></div>
-			</section>
-
-			<div id="allLikes">
-				<div><span id="allLikesNumber"></span>&nbsp;<i class="fa-solid fa-heart" aria-hidden="true" title="Total Likes"></i>
-					<span class="sr-only">Total Likes</span>
+				  </div>
 				</div>
-				<div><span id="dailyPrice"></span>€ / jour</div>
-			</div>
+			  </section>
+			  
+
+			  <div id="allLikes">
+				<div aria-labelledby="allLikesNumberLabel">
+				  <span id="allLikesNumber"></span>
+				  <span id="allLikesNumberLabel" class="sr-only">Total Likes: </span>
+				  <i class="fa-solid fa-heart" aria-hidden="true" title="Total Likes"></i>
+				  <span class="sr-only">Total Likes</span>
+				</div>
+				<div aria-labelledby="dailyPriceLabel">
+				  <span id="dailyPrice"></span>
+				  <span id="dailyPriceLabel" class="sr-only">Prix quotidien : </span>
+				  <span>€ / jour</span>
+				</div>
+			  </div>
+			  
 		</main>
 
 		<script type="module" src="../javascript/pages/photographer.js"></script>
