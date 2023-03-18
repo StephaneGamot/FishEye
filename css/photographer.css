@@ -52,6 +52,10 @@
 	border-radius: 5px;
 	cursor: pointer;
 }
+.contact_button:focus {
+	outline: 2px solid gold;
+	background-color: red;
+}
 
 .photograph-divRight {
 	display: flex;
@@ -251,6 +255,10 @@ form textarea {
 	padding: 20px;
 	border: 0;
 	cursor: pointer;
+}
+.dropdown-button:focus {
+	outline: 2px solid gold;
+	background-color: red;
 }
 #dropdown-menu {
 	display: none;

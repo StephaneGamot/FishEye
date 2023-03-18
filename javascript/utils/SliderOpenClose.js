@@ -7,6 +7,10 @@ import photoTemplate from "../template/photoTemplate.js";
 import PhotoModels from "../models/PhotoModels.js";
 
 const sliderContainer = document.getElementById("sliderContainer");
+sliderContainer.setAttribute("role", "dialog");
+
+sliderContainer.setAttribute("aria-labelledby", "mediaName");
+
 const slide = document.getElementById("slide");
 const modalCloseSlider = document.getElementById("modal-close-slider");
 const sliderWidth = sliderContainer.offsetWidth;
@@ -14,7 +18,6 @@ const mediaName = document.getElementById("mediaName");
 const whiteBg = document.getElementById("whiteBG");
 
 export function displayPhotosModalSlider(index) {
-
 	photographerEachIdMedia.forEach((elem) => {
 		if ("image" in elem) {
 			const photoMedia = SliderPhotoTemplate(elem); // Òbjet avce les infos de la photos
@@ -31,15 +34,22 @@ export function displayPhotosModalSlider(index) {
 
 	const modalCloseSlider = document.getElementById("modal-close-slider");
 	modalCloseSlider.addEventListener("click", closeModalSlider);
+
 	const sliderBtnLeft = document.getElementById("slider-btn-left");
 	const sliderBtnRight = document.getElementById("slider-btn-right");
+	sliderBtnLeft.setAttribute("tabindex", "0");
+	sliderBtnRight.setAttribute("tabindex", "0");
+	sliderBtnLeft.setAttribute("aria-label", "Image précédente");
+sliderBtnRight.setAttribute("aria-label", "Image suivante");
+
+
 	let slideIndex = parseInt(index) - 1;
 	let currentMediaIndex = index - 1;
 	let sliderImgTitle = photographerEachIdMedia[currentMediaIndex].title;
 	mediaName.textContent = sliderImgTitle;
 	const sliderImgTitleLength = photographerEachIdMedia.length;
 	let newMediaIndexParse = parseInt(sliderImgTitleLength);
-console.log(newMediaIndexParse);
+	console.log(newMediaIndexParse);
 	showSlide(slideIndex);
 	function showSlide(n) {
 		slide.style.transform = `translateX(-${n * 100}%)`;
@@ -60,26 +70,20 @@ console.log(newMediaIndexParse);
 		clickCount++;
 		if (index === 0) {
 			index = newMediaIndexParse - 1;
-			console.log("1");
 		} else if (clickCount === 1 && index != 0) {
 			index -= 2;
-			console.log("2");
 		} else {
 			index -= 1;
-			console.log("3");
 		}
-		if (index >= 0 && index < photographerEachIdMedia.length) {  // me permet de vérifiez l'index si il est valide avant de mettre à jour 
+		if (index >= 0 && index < photographerEachIdMedia.length) {
+			// me permet de vérifiez l'index si il est valide avant de mettre à jour
 			mediaName.textContent = photographerEachIdMedia[index].title;
-			console.log("4");
-			console.log(index);
-			console.log(slideIndex);
 		}
 	}
 
 	function nextSlide() {
 		if (slideIndex === slide.children.length - 1) {
 			slideIndex = 0;
-			
 		} else {
 			slideIndex++;
 		}
@@ -94,8 +98,6 @@ console.log(newMediaIndexParse);
 			console.log(index);
 			console.log(newMediaIndexParse);
 			console.log(currentMediaIndex);
-
-
 		} else {
 			mediaName.textContent = photographerEachIdMedia[index++].title;
 			console.log("6");
@@ -104,18 +106,52 @@ console.log(newMediaIndexParse);
 			console.log(currentMediaIndex);
 		}
 	}
+	function handleKeyDown(event) {
+		if (event.key === "ArrowLeft" || event.key === "Left") {
+			prevSlide();
+			prevName();
+		} else if (event.key === "ArrowRight" || event.key === "Right") {
+			nextSlide();
+			nextName();
+		} else if (event.key === "Escape" || event.key === "Esc") {
+			closeModalSlider();
+		}
+	}
+
+	function addKeyboardListeners() {
+		document.addEventListener("keydown", handleKeyDown);
+	}
+
+	function removeKeyboardListeners() {
+		document.removeEventListener("keydown", handleKeyDown);
+	}
 
 	sliderBtnLeft.addEventListener("click", prevSlide);
 	sliderBtnLeft.addEventListener("click", prevName);
 	sliderBtnRight.addEventListener("click", nextSlide);
 	sliderBtnRight.addEventListener("click", nextName);
 
+	sliderBtnLeft.addEventListener("keydown", (e) => {
+		if (e.key === "Enter" || e.key === " ") {
+			prevSlide();
+			prevName();
+		}
+	});
+
+	sliderBtnRight.addEventListener("keydown", (e) => {
+		if (e.key === "Enter" || e.key === " ") {
+			nextSlide();
+			nextName();
+		}
+	});
+
 	function closeModalSlider() {
 		sliderContainer.style.display = "none";
 		theSlide.innerHTML = ""; // Vider la galerie
 		slide.innerHTML = "";
 		whiteBg.style.display = "none";
-		console.log("fermé");
+		removeKeyboardListeners(); // je retire les gestionnaires d'événements pour clavier lorsque le modal de ferme
+		sliderContainer.removeAttribute("aria-modal"); // Retirer l'attribut aria-modal lorsque le modal est fermé
 	}
 }
 
@@ -126,4 +162,7 @@ export function openModalSlider(index) {
 	whiteBg.style.display = "block";
 	console.log("AZ");
 	displayPhotosModalSlider(index);
+	addKeyboardListeners(); // j'ajoute les gestionnaires d'événements pour clavier lorsque le modal s'ouvre
+	sliderContainer.setAttribute("aria-modal", "true"); // Ajouter l'attribut aria-modal lorsque le modal est ouvert
+
 }

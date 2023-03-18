@@ -8,22 +8,17 @@ export function displayModal() {
 	ModalContactForm();
 }
 
-export async function ModalContactForm() {
-	
+// permet de gerer au click la fermeture du modal
+export async function ModalContactForm() {                      
 	const modalClose = document.getElementById("close-modal");
-	
-	// fonction qui permet de gerer au click la fermeture du modal
+	modalClose.setAttribute("aria-label", "Fermer le formulaire de contact");
 	modalClose.addEventListener("click", closeModal);
-
+	modalClose.setAttribute("role", "button");
 	function closeModal() {
 		modal.style.display = "none";
 	}
 
-	// Je recupere le nom du photographe
-
-	console.log(photographers);
-	const PhotographName = photographers[0].name;
-	console.log(PhotographName);
+	const PhotographName = photographers[0].name;               // Je recupere le nom du photographe
 
 	// DOM
 	const firstName = document.getElementById("firstName");
@@ -31,6 +26,13 @@ export async function ModalContactForm() {
 	const email = document.getElementById("email");
 	const message = document.getElementById("message");
 	const sendBtn = document.getElementById("btnSend");
+
+	// aria-label
+	firstName.setAttribute("aria-label", "Prénom");
+	lastName.setAttribute("aria-label", "Nom");
+	email.setAttribute("aria-label", "Email");
+	message.setAttribute("aria-label", "Message");
+	sendBtn.setAttribute("role", "button");
 
 	// H1
 	const modal_H1 = document.getElementById("ModalH1");
@@ -48,11 +50,17 @@ export async function ModalContactForm() {
 	const emailErr = document.getElementById("emailErr");
 	const messageErr = document.getElementById("messageErr");
 
+	// Ajout d'attributs aria-live pour informer les utilisateurs d'écran de lecture des erreurs
+	firstNameErr.setAttribute("aria-live", "polite");
+	lastNameErr.setAttribute("aria-live", "polite");
+	emailErr.setAttribute("aria-live", "polite");
+	messageErr.setAttribute("aria-live", "polite");
+
 	// REGEX
 	const alphaRegex = /^[a-zA-Zéêëèîïâäàçù ,.'-]{2,70}$/;
 	const emailRegex = /^([a-zA-Z0-9.-_--]+[@]{1}[a-zA-Z0-9.-_--]+[.]{1}[a-z]{2,3}){0,90}$/;
 
-	/*****  Listen input addEventListener *****/
+	// Listen input addEventListener 
 	firstName.addEventListener("input", function () {
 		validateFirstName();
 	});
@@ -65,28 +73,25 @@ export async function ModalContactForm() {
 	message.addEventListener("input", function () {
 		validateMessage();
 	});
-	sendBtn.addEventListener("click", function (event) {
-		// création d'un addEventListener pour le bouton submit j'ecoute pour voir s'il repond a ma demande
-		event.preventDefault(); // Je bloque tant que tout n 'est pas accepté
-		validate(); // c'est la fonction qui sera exécuté lorsque on ecrira dans l'input (suite a notre ecoute)
+	sendBtn.addEventListener("click", function (event) {        // création d'un addEventListener pour le bouton submit j'ecoute pour voir s'il repond a ma demande
+		event.preventDefault();                                 // Je bloque tant que tout n 'est pas accepté
+		validate();                                             // c'est la fonction qui sera exécuté lorsque on ecrira dans l'input (suite a notre ecoute)
 	});
-	
+
 	/***** Validate First Name *****/
-	let validateFirstName = function () {
-		// création de la fonction que je vais ecouter pour valider qu'il n'y a pas "d'erreur de frappe"
-		let testFirstName = alphaRegex.test(firstName.value); // je teste avec le regex ce qu'ecrit le client voir qu'il n'y est pas d'erreur
+	let validateFirstName = function () {                       // création de la fonction que je vais ecouter pour valider qu'il n'y a pas "d'erreur de frappe"	
+		let testFirstName = alphaRegex.test(firstName.value);   // je teste avec le regex ce qu'ecrit le client voir qu'il n'y est pas d'erreur
 		const firstNameValue = document.getElementById("firstName").value;
-		if (testFirstName == false) {
-			// si mon test ne passe pas
+		if (testFirstName == false) {                           // si mon test ne passe pas
 			firstNameErr.textContent = "Veuillez saisir votre prénom svp 🙏"; // alors on ecrit un message d'erreur dessous "bla bla bla"
-			firstNameErr.classList.add("inputErr"); // Me permet d'afficher le message d'erreur en rouge petite taille .....
-			firstName.classList.add("inputErrBorder"); // me permet de creer une bordure rouge
+			firstNameErr.classList.add("inputErr");             // Me permet d'afficher le message d'erreur en rouge petite taille .....
+			firstName.classList.add("inputErrBorder");          // me permet de creer une bordure rouge
 		} else {
-			firstNameErr.textContent = ""; // puisqu'il n 'y a pas erreur on n'ecris pas de message erreur!
-			firstName.classList.remove("inputErrBorder"); // puisqu'il n 'y a pas erreur je retire la bordure colorée
-		console.log(firstNameValue);
+			firstNameErr.textContent = "";                      // puisqu'il n 'y a pas erreur on n'ecris pas de message erreur!
+			firstName.classList.remove("inputErrBorder");       // puisqu'il n 'y a pas erreur je retire la bordure colorée
+			console.log(firstNameValue);
 		}
-		
+
 		return testFirstName;
 	};
 
@@ -139,12 +144,6 @@ export async function ModalContactForm() {
 
 	// Si tous les inputs sont validés alors le Modal sera accepté et se retirera
 	function validate() {
-		validateFirstName() &&
-			validateLastName() &&
-			validateEmail() &&
-			validateMessage() &&
-			closeModal();
-			
+		validateFirstName() && validateLastName() && validateEmail() && validateMessage() && closeModal();
 	}
-	
 }

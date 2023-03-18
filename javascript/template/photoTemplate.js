@@ -14,10 +14,10 @@ export default function photoTemplate(data, index) {
 		mediaCard.classList.add("photograph-photoCard");
 
 		// création de la photo avec son lien vers le modal
-		const mediaButton = document.createElement('a');
+		const mediaButton = document.createElement("a");
 		mediaButton.classList.add("modal-btn-slider");
-		mediaButton.setAttribute("data-index", index +1) ;
-		//mediaButton.setAttribute('tabindex', '0');
+		mediaButton.setAttribute("data-index", index + 1);
+		mediaButton.setAttribute("aria-label", "Afficher la photo " + title);
 
 		const photoImg = document.createElement("img");
 		photoImg.classList.add("photograph-photoImg");
@@ -26,12 +26,10 @@ export default function photoTemplate(data, index) {
 		photoImg.setAttribute("type", "jpg");
 		photoImg.setAttribute("alt", "titre du media" + title);
 		photoImg.setAttribute("data-id", id);
-		
-		
-		photoImg.addEventListener('click', function() {
+
+		photoImg.addEventListener("click", function () {
 			photoImg.classList.add("index");
-		  });
-		  
+		});
 
 		// création du bas de la carte avec son nom et ses likes
 		const footerCard = document.createElement("div");
@@ -43,6 +41,9 @@ export default function photoTemplate(data, index) {
 
 		const divLikes = document.createElement("div");
 		divLikes.classList.add("photograph-likes");
+		divLikes.setAttribute("role", "button");
+		divLikes.setAttribute("aria-label", "Aimer la photo " + title);
+		divLikes.setAttribute("tabindex", "0");
 
 		let theLikes = likes;
 		let totalLikes2 = totalLikes;
@@ -64,8 +65,6 @@ export default function photoTemplate(data, index) {
 			likesNumber.textContent = theLikes;
 			document.getElementById("allLikesNumber").innerHTML = totalLikes2;
 		});
-
-		//likesNumber.textContent = likes;
 
 		const likesNumber = document.createElement("h3");
 		likesNumber.classList.add("photograph-likesNumber");
@@ -99,9 +98,7 @@ export default function photoTemplate(data, index) {
 		likes,
 		divLikes,
 		id,
-		
+
 		photoTemplateCardDom,
 	};
 }
-
-

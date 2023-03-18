@@ -4,14 +4,19 @@ export default function SliderPhotoTemplate(data) {
 
 	function createImgElement() {
 		const imgSliderDisplay = document.createElement("img");
-		imgSliderDisplay.classList.add("slider-img");
-		imgSliderDisplay.classList.add("photograph-allMedia");
+		imgSliderDisplay.classList.add("slider-img", "photograph-allMedia");
 		imgSliderDisplay.setAttribute("src", carrouselMedia);
-		imgSliderDisplay.setAttribute("alt", title);
+		imgSliderDisplay.setAttribute("alt", "Image du carrousel : " + title);
 		imgSliderDisplay.setAttribute("data-id", id);
 		imgSliderDisplay.setAttribute("type", "jpg");
+		imgSliderDisplay.setAttribute("aria-labelledby", `slider-title-${id}`);
+		imgSliderDisplay.setAttribute("tabindex", "0");
+		imgSliderDisplay.setAttribute("aria-hidden", "true");
+
 		const imgSliderDisplayTitle = document.createElement("h2");
 		imgSliderDisplayTitle.textContent = title;
+		imgSliderDisplayTitle.id = `slider-title-${id}`;
+		
 		return imgSliderDisplay;
 	}
 
