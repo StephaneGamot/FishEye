@@ -10,7 +10,6 @@ import PhotoModels from "../models/PhotoModels.js";
 
 const sliderContainer = document.getElementById("sliderContainer");
 sliderContainer.setAttribute("role", "dialog");
-
 sliderContainer.setAttribute("aria-labelledby", "mediaName");
 
 const slide = document.getElementById("slide");
@@ -19,17 +18,26 @@ const sliderWidth = sliderContainer.offsetWidth;
 const mediaName = document.getElementById("mediaName");
 const whiteBg = document.getElementById("whiteBG");
 
+
+function closeModalSlider() {
+	sliderContainer.style.display = "none";
+	theSlide.innerHTML = ""; // Vider la galerie
+	slide.innerHTML = "";
+	whiteBg.style.display = "none";
+	removeKeyboardListeners(); // je retire les gestionnaires d'événements pour clavier lorsque le modal de ferme
+	sliderContainer.removeAttribute("aria-modal"); // Retirer l'attribut aria-modal lorsque le modal est fermé
+}
+
 function handleKeyDown(event) {
 	if (event.key === "ArrowLeft" || event.key === "Left") {
-		prevSlide();
-		prevName();
+		prev();
 	} else if (event.key === "ArrowRight" || event.key === "Right") {
-		nextSlide();
-		nextName();
+		next();
 	} else if (event.key === "Escape" || event.key === "Esc") {
 		closeModalSlider();
 	}
 }
+
 
 function addKeyboardListeners() {
 	document.addEventListener("keydown", handleKeyDown);
@@ -80,7 +88,6 @@ function showSlide(n) {
 
 let clickCount = 0;
 
-
 function prev() {
 	clickCount++;
     if (slideIndex === 0) {
@@ -114,31 +121,25 @@ function next() {
     mediaName.textContent = photographerEachIdMedia[index].title;
 }
 
-	
 	sliderBtnLeft.addEventListener("click", prev);
 	sliderBtnRight.addEventListener("click", next);
 	
 	sliderBtnLeft.addEventListener("keydown", (e) => {
 		if (e.key === "Enter" || e.key === " ") {
+			e.preventDefault();
 			prev();
 		}
 	});
 	
 	sliderBtnRight.addEventListener("keydown", (e) => {
 		if (e.key === "Enter" || e.key === " ") {
+			e.preventDefault();
 			next();
 		}
 	});
 	
 
-	function closeModalSlider() {
-		sliderContainer.style.display = "none";
-		theSlide.innerHTML = ""; // Vider la galerie
-		slide.innerHTML = "";
-		whiteBg.style.display = "none";
-		removeKeyboardListeners(); // je retire les gestionnaires d'événements pour clavier lorsque le modal de ferme
-		sliderContainer.removeAttribute("aria-modal"); // Retirer l'attribut aria-modal lorsque le modal est fermé
-	}
+	
 }
 
 export function openModalSlider(index) {
