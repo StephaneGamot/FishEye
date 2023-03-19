@@ -1,4 +1,4 @@
-import { totalLikes } from "../utils/totalLikes.js";
+import toggleLike from "./likeTemplate.js"
 
 export function VideoTemplate(data, index) {
 	const { id, title, video, likes } = data;
@@ -41,37 +41,21 @@ export function VideoTemplate(data, index) {
 		photoName.textContent = title;
 		photoName.id = `photoName-${id}`;
 
-		let theLikes = likes;
-		let totalLikes2 = totalLikes;
 		const divLikes = document.createElement("div");
 		divLikes.classList.add("photograph-likes");
 		divLikes.setAttribute("role", "button");
 		divLikes.setAttribute("aria-label", "Aimer la vidéo " + title);
 		divLikes.setAttribute("tabindex", "0");
-		divLikes.addEventListener("click", function () {
-			if (theLikes === likes) {
-				theLikes++;
-				totalLikes2++;
-				console.log(theLikes);
-				console.log(totalLikes2);
-			} else if (totalLikes2 === totalLikes) {
-				totalLikes2 += console.log(totalLikes2);
-			} else {
-				theLikes--;
-				totalLikes2--;
-				console.log(theLikes);
-				console.log(totalLikes2);
-			}
-			likesNumber.textContent = theLikes;
-			document.getElementById("allLikesNumber").innerHTML = totalLikes2;
-		});
+		let theLikes = likes;
+		data.isLiked = false;
+		data.currentLikes = data.likes;
+		divLikes.addEventListener("click", () => toggleLike(data, likesNumber));
 
 		const likesNumber = document.createElement("h3");
 		likesNumber.classList.add("photograph-likesNumber");
 		likesNumber.textContent = likes;
 		likesNumber.setAttribute("aria-label", "bouton j'aime");
 		likesNumber.setAttribute("aria-label", "Nombre de 'j'aime' pour la vidéo " + title);
-		//likesNumber.id = `likes-number-${id}`;
 
 		const littleHeart = document.createElement("img");
 		littleHeart.src = "../assets/images/myHeart.png";

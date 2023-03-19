@@ -14,24 +14,62 @@ import { sortByName } from "../utils/sortByName.js";
 import { urlparam, ID, dataApi, photographers, media, galleryMedia, theSlide, slides, getMediasDataId, photoImgs  } from "../Config/GetAllData.js";
 import photographerMediaCreateDom from "../Config/photographerMediaCreateDom.js";
 import { allPhotographeLikes } from "../utils/totalLikes.js";
-import silverTemplate from "../template/sliderTemplate.js";
+
 import photographerCreateDom from "../utils/photographerCreateDom.js"
 
+/********************** Récupération des données pour les photographes ************************************/
 
-photographerCreateDom();                                                                 // Récupération des données pour les photographes
+photographerCreateDom();                                                               
 
-modalBtn.addEventListener("click", displayModal);                                        // bouton qui enclenche le modal de contact
+/********************** enclenche le modal de contact ************************************/
 
-document.getElementById("dropdown-button-title").addEventListener("click", sortByName);  // Tri des photos par ordre alphabétique
-document.getElementById("dropdown-button-popular").addEventListener("click", sortByLike);// Tri des photos par nb de coeur du - au +
-document.getElementById("dropdown-button-date").addEventListener("click", sortByDate);   // Tri des photos par date du + ancien au + recent
+modalBtn.addEventListener("click", displayModal);                                      
 
-photographerMediaCreateDom();                                                            // Appel de ma fonction pour la gallerie de photo
+/********************** BOUTON DE TRI ************************************/
+const dropdownMenu = document.getElementById('dropdown-menu');
 
-const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");                   // Ouverture du modal / Slider 
+// Tri des photos par nb de coeur du - au +
+const dropdownButtonPopular = document.getElementById('dropdown-button-popular');
+dropdownButtonPopular.addEventListener("click", sortByLike);                     
+dropdownButtonPopular.addEventListener('keydown', (event) => {
+	if (event.key === 'Enter' || event.key === ' ') {
+	  event.preventDefault();
+	  dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+	}
+  });
+
+  // Tri des photos par date du + ancien au + recent
+const dropdownButtonDate = document.getElementById('dropdown-button-date');
+dropdownButtonDate.addEventListener("click", sortByDate);                           
+dropdownButtonDate.addEventListener('keydown', (event) => {
+	if (event.key === 'Enter' || event.key === ' ') {
+	  event.preventDefault();
+	  sortByDate();
+	}
+  });
+
+  // Tri des photos par ordre alphabétique
+const dropdownButtonTitle = document.getElementById('dropdown-button-title');
+dropdownButtonTitle.addEventListener("click", sortByName);                          
+dropdownButtonTitle.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    sortByName();
+  }
+});
+
+/********************** Appel de la fonction Gallery photo ************************************/
+
+photographerMediaCreateDom();                                                           
+
+/********************** Ouverture du modal / Slider ************************************/
+
+const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");                  
 modalBtnSlider.forEach((media, index) => {	
 	media.addEventListener("click", () => openModalSlider(media.dataset.index));	
 });
 
-allPhotographeLikes();                                                                   // Tous les Likes en bas de page
+/********************** Gere tous les Likes en bas de page ************************************/
+
+allPhotographeLikes();                                                                  
 

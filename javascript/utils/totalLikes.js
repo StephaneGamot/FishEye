@@ -1,23 +1,38 @@
 import { photographers, photographerEachIdMedia, ID } from "../Config/GetAllData.js";
 
+// Je filtre les photographes en fonction de l'ID
 const photographerId = photographers.filter((elem) => elem.id == ID);
 const getNumbersOfMedia = photographerEachIdMedia.length;
 
+// Récupérer le nombre de likes de chaques photos
 let total = photographerEachIdMedia.map((item) => {
 	if (item.hasOwnProperty("likes")) {
 		return item.likes;
 	}
 });
 
+// Addition des phot likes
 export let totalLikes = total.reduce(allPhotographeLikes);
 
 export function allPhotographeLikes(a, b) {
 	return a + b;
 }
+// Je récupére le prix journalier du photographe
 export const dailyPrice = photographerId[0].price;
 
-document.getElementById("allLikesNumber").innerHTML = totalLikes;
-document.getElementById("dailyPrice").innerHTML = dailyPrice;
+// Je localise ...
+const allLikesNumberElement = document.getElementById("allLikesNumber");
+const dailyPriceElement = document.getElementById("dailyPrice");
+
+// Mettre à jour dans le HTML 
+allLikesNumberElement.innerHTML = totalLikes;
+dailyPriceElement.innerHTML = dailyPrice;
+
+// Mise a jour du total de like une fois cliqué
+export function updateTotalLikes(increment) {
+  totalLikes += increment;
+  allLikesNumberElement.innerHTML = totalLikes;
+}
 
 
 

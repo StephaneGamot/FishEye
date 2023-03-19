@@ -3,7 +3,7 @@
 	height: 300px;
 	margin: 0 100px;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(3, 1fr);
 	gap: 70px;
 }
 
@@ -34,7 +34,8 @@
 	margin: 10px 0 0 0;
 }
 
-.photograph-divCenter {
+.photograph-divCenter,
+.photograph-divRight {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -52,15 +53,9 @@
 	border-radius: 5px;
 	cursor: pointer;
 }
-.contact_button:focus {
-	outline: 2px solid gold;
-	background-color: red;
-}
 
-.photograph-divRight {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.contact_button:focus {
+	color: gold;
 }
 
 .photograph-pic {
@@ -68,13 +63,13 @@
 	width: 200px;
 	border-radius: 50%;
 	object-fit: cover;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0 auto;
 }
 
 .photograph-input {
 	margin: 0 100px;
 }
+
 .photograph-gallery {
 	display: flex;
 	flex-wrap: wrap;
@@ -140,6 +135,7 @@
 }
 
 /************** MODAL ****************/
+
 #contact_modal {
 	display: none;
 	position: fixed;
@@ -150,6 +146,7 @@
 	width: 100%;
 	overflow: auto;
 }
+
 .modal {
 	border-radius: 5px;
 	background-color: #db8876;
@@ -216,6 +213,7 @@ form textarea {
 	border: none;
 	border-radius: 5px;
 }
+
 .inputErr {
 	font-size: 14px;
 	font-weight: 400;
@@ -223,11 +221,13 @@ form textarea {
 	color: white;
 	margin: 2px 0 3px 2px;
 }
+
 .inputErrBorder {
 	border: 2px solid red;
 }
 
 /************** BOUTON DE TRI ****************/
+
 #selector {
 	display: flex;
 	margin: 10px 0 0 100px;
@@ -244,6 +244,7 @@ form textarea {
 	border-radius: 5px;
 	z-index: 2;
 }
+
 .dropdown-button {
 	background-color: #901c1c;
 	display: flex;
@@ -256,10 +257,11 @@ form textarea {
 	border: 0;
 	cursor: pointer;
 }
+
 .dropdown-button:focus {
-	outline: 2px solid gold;
-	background-color: red;
+	color: gold;
 }
+
 #dropdown-menu {
 	display: none;
 	position: absolute;
@@ -278,17 +280,21 @@ form textarea {
 	line-height: 24px;
 	display: block;
 }
+
 hr {
 	color: white;
 	width: 150px;
 	margin: 0 auto;
 }
-.fa-chevron-down .fa-solid {
+
+.fa-chevron-down,
+.fa-solid {
 	color: white;
 	font-size: 15px;
 }
 
 /************* TOUS LES LIKES ++ ****************/
+
 #allLikes {
 	width: 376px;
 	height: 89px;
@@ -305,15 +311,6 @@ hr {
 	justify-content: space-evenly;
 	align-items: center;
 	padding: 0 10px;
-}
-
-#zzz {
-	background-color: darkturquoise;
-	width: 400px;
-	height: 100px;
-	display: flex;
-	font-size: 30px;
-	justify-content: space-evenly;
 }
 
 /************ CARROUSEL *********************************/
@@ -343,7 +340,6 @@ hr {
 	height: 50px;
 	border-radius: 50%;
 	background: transparent;
-
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
@@ -355,17 +351,19 @@ hr {
 
 .direction-btn img {
 	width: 50%;
-
 	pointer-events: none;
 }
+
 .direction-btn.right {
 	right: 22%;
-	top:47%;
+	top: 47%;
 }
+
 .direction-btn.left {
 	left: 22%;
-	top:47%;
+	top: 47%;
 }
+
 .modal-close-slider {
 	color: #901c1c;
 	position: absolute;
@@ -377,13 +375,14 @@ hr {
 	width: 50px;
 	height: 50px;
 }
+
 .fa-solid.fa-xmark {
 	width: 50px;
 	height: 50px;
 }
+
 .slide {
 	display: flex;
-	
 	width: 100%;
 	max-width: 1200px;
 	position: relative;
@@ -401,12 +400,14 @@ hr {
 	border-radius: 5px;
 	object-position: 50% 50%;
 }
+
 .slider-media-title {
 	font-size: 24px;
 	line-height: 30px;
 	color: #911c1c;
 	margin: 12px 0 0 1px;
 }
+
 #whiteBG {
 	display: none;
 	position: fixed;
@@ -421,5 +422,4 @@ hr {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	
 }

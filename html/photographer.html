@@ -26,7 +26,7 @@
 		  
 		<main>
 			<section id="head-main">
-				<button type="button" aria-label="coordonnees" id="btnContact" class="contact_button" aria-expanded="false">Contactez-moi</button>
+				<button type="button" aria-label="coordonnees" id="btnContact" class="contact_button" aria-expanded="false" >Contactez-moi</button>
 			  
 				<div id="contact_modal">
 				  <div class="modal" aria-hidden="true" role="dialog" aria-labelledby="ModalH1" id="modalContact">
@@ -66,15 +66,15 @@
 				<h3>Trier par</h3>
 				<div class="dropdown-border">
 				  <div class="dropdown">
-					<button type="button" id="dropdown-button-popular" class="dropdown-button" aria-haspopup="true" aria-expanded="false" aria-label="Popularité">
+					<button type="button" id="dropdown-button-popular" class="dropdown-button" aria-haspopup="true" aria-expanded="false" aria-label="Popularité" tabindex="0">
 					  Popularité<i id="arrow" class="fa-solid fa-chevron-down" aria-hidden="true" title="Cliquer pour plus de choix"></i>
 					  <span class="sr-only">Cliquer pour plus de choix</span>
 					</button>
 					<div id="dropdown-menu" role="menu">
 					  <hr />
-					  <button type="button" id="dropdown-button-date" class="dropdown-button" role="menuitem" aria-label="Date">Date</button>
+					  <button type="button" id="dropdown-button-date" class="dropdown-button" role="menuitem" aria-label="Date" tabindex="0">Date</button>
 					  <hr />
-					  <button type="button" id="dropdown-button-title" class="dropdown-button" role="menuitem" aria-label="Titre">Titre</button>
+					  <button type="button" id="dropdown-button-title" class="dropdown-button" role="menuitem" aria-label="Titre" tabindex="0">Titre</button>
 					</div>
 				  </div>
 				</div>
@@ -109,18 +109,19 @@
 			  
 
 			  <div id="allLikes">
-				<div aria-labelledby="allLikesNumberLabel">
-				  <span id="allLikesNumber"></span>
+				<div>
+				  <span id="allLikesNumber" aria-describedby="allLikesNumberLabel"></span>
 				  <span id="allLikesNumberLabel" class="sr-only">Total Likes: </span>
 				  <i class="fa-solid fa-heart" aria-hidden="true" title="Total Likes"></i>
-				  <span class="sr-only">Total Likes</span>
 				</div>
-				<div aria-labelledby="dailyPriceLabel">
-				  <span id="dailyPrice"></span>
+				<div>
+				  <span id="dailyPrice" aria-describedby="dailyPriceLabel"></span>
 				  <span id="dailyPriceLabel" class="sr-only">Prix quotidien : </span>
 				  <span>€ / jour</span>
 				</div>
 			  </div>
+			  
+			  
 			  
 		</main>
 

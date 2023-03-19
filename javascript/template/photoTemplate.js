@@ -1,4 +1,5 @@
 import { totalLikes } from "../utils/totalLikes.js";
+import toggleLike from "./likeTemplate.js"
 
 export default function photoTemplate(data, index) {
 	const { title, image, likes, id } = data;
@@ -26,7 +27,6 @@ export default function photoTemplate(data, index) {
 		photoImg.setAttribute("type", "jpg");
 		photoImg.setAttribute("alt", "titre du media" + title);
 		photoImg.setAttribute("data-id", id);
-
 		photoImg.addEventListener("click", function () {
 			photoImg.classList.add("index");
 		});
@@ -46,32 +46,15 @@ export default function photoTemplate(data, index) {
 		divLikes.setAttribute("tabindex", "0");
 
 		let theLikes = likes;
-		let totalLikes2 = totalLikes;
-
-		divLikes.addEventListener("click", function () {
-			if (theLikes === likes) {
-				theLikes++;
-				totalLikes2++;
-				console.log(theLikes);
-				console.log(totalLikes2);
-			} else if (totalLikes2 === totalLikes) {
-				totalLikes2 += console.log(totalLikes2);
-			} else {
-				theLikes--;
-				totalLikes2--;
-				console.log(theLikes);
-				console.log(totalLikes2);
-			}
-			likesNumber.textContent = theLikes;
-			document.getElementById("allLikesNumber").innerHTML = totalLikes2;
-		});
+		data.isLiked = false;
+		data.currentLikes = data.likes;
+		divLikes.addEventListener("click", () => toggleLike(data, likesNumber));
 
 		const likesNumber = document.createElement("h3");
 		likesNumber.classList.add("photograph-likesNumber");
 		likesNumber.textContent = theLikes;
 
 		const littleHeart = document.createElement("img");
-		//littleHeart.setAttribute("id", "myLittleHeart");
 		littleHeart.src = "../assets/images/myHeart.png";
 		littleHeart.classList.add("photograph-littleHeart");
 		littleHeart.setAttribute("alt", "Petit coeur rouge permetant de like ou disliker");
@@ -98,7 +81,6 @@ export default function photoTemplate(data, index) {
 		likes,
 		divLikes,
 		id,
-
 		photoTemplateCardDom,
 	};
 }

@@ -1,3 +1,5 @@
+
+
 import { photographerEachIdMedia, galleryMedia } from "../Config/GetAllData.js";
 import { theSlide, mediaByFactory, getMediasDataId } from "../Config/GetAllData.js";
 import { slides, photoImgs, media, ID } from "../Config/GetAllData.js";
@@ -16,6 +18,26 @@ const modalCloseSlider = document.getElementById("modal-close-slider");
 const sliderWidth = sliderContainer.offsetWidth;
 const mediaName = document.getElementById("mediaName");
 const whiteBg = document.getElementById("whiteBG");
+
+function handleKeyDown(event) {
+	if (event.key === "ArrowLeft" || event.key === "Left") {
+		prevSlide();
+		prevName();
+	} else if (event.key === "ArrowRight" || event.key === "Right") {
+		nextSlide();
+		nextName();
+	} else if (event.key === "Escape" || event.key === "Esc") {
+		closeModalSlider();
+	}
+}
+
+function addKeyboardListeners() {
+	document.addEventListener("keydown", handleKeyDown);
+}
+
+function removeKeyboardListeners() {
+	document.removeEventListener("keydown", handleKeyDown);
+}
 
 export function displayPhotosModalSlider(index) {
 	photographerEachIdMedia.forEach((elem) => {
@@ -43,107 +65,71 @@ export function displayPhotosModalSlider(index) {
 sliderBtnRight.setAttribute("aria-label", "Image suivante");
 
 
-	let slideIndex = parseInt(index) - 1;
-	let currentMediaIndex = index - 1;
-	let sliderImgTitle = photographerEachIdMedia[currentMediaIndex].title;
-	mediaName.textContent = sliderImgTitle;
-	const sliderImgTitleLength = photographerEachIdMedia.length;
-	let newMediaIndexParse = parseInt(sliderImgTitleLength);
-	console.log(newMediaIndexParse);
-	showSlide(slideIndex);
-	function showSlide(n) {
-		slide.style.transform = `translateX(-${n * 100}%)`;
+let slideIndex = parseInt(index) - 1;
+let currentMediaIndex = index - 1;
+let sliderImgTitle = photographerEachIdMedia[currentMediaIndex].title;
+mediaName.textContent = sliderImgTitle;
+const sliderImgTitleLength = photographerEachIdMedia.length;
+let newMediaIndexParse = parseInt(sliderImgTitleLength);
+
+showSlide(slideIndex);
+
+function showSlide(n) {
+    slide.style.transform = `translateX(-${n * 100}%)`;
+}
+
+let clickCount = 0;
+
+
+function prev() {
+	clickCount++;
+    if (slideIndex === 0) {
+        slideIndex = slide.children.length - 1;
+        index = newMediaIndexParse;
+    } else if (clickCount === 1) {
+		index -= 1;
+		slideIndex--;
 	}
+	else {
+        slideIndex--;
+    }
+    index--;
+    showSlide(slideIndex);
+    mediaName.textContent = photographerEachIdMedia[index].title;
+}
 
-	function prevSlide() {
-		if (slideIndex === 0) {
-			slideIndex = slide.children.length - 1;
-		} else {
-			slideIndex--;
-		}
-		showSlide(slideIndex);
-	}
+function next() {
+	clickCount++;
+    if (slideIndex === slide.children.length - 1) {
+        slideIndex = 0;
+        index = -1;
+    } else if (clickCount === 1) {
+		slideIndex++;
+		index -= 1;
+	}else {
+        slideIndex++;
+    }
+    index++;
+    showSlide(slideIndex);
+    mediaName.textContent = photographerEachIdMedia[index].title;
+}
 
-	let clickCount = 0;
-
-	function prevName() {
-		clickCount++;
-		if (index === 0) {
-			index = newMediaIndexParse - 1;
-		} else if (clickCount === 1 && index != 0) {
-			index -= 2;
-		} else {
-			index -= 1;
-		}
-		if (index >= 0 && index < photographerEachIdMedia.length) {
-			// me permet de vérifiez l'index si il est valide avant de mettre à jour
-			mediaName.textContent = photographerEachIdMedia[index].title;
-		}
-	}
-
-	function nextSlide() {
-		if (slideIndex === slide.children.length - 1) {
-			slideIndex = 0;
-		} else {
-			slideIndex++;
-		}
-		showSlide(slideIndex);
-	}
-
-	function nextName() {
-		if (index === newMediaIndexParse) {
-			index = 0;
-			mediaName.textContent = photographerEachIdMedia[index].title;
-			console.log("5");
-			console.log(index);
-			console.log(newMediaIndexParse);
-			console.log(currentMediaIndex);
-		} else {
-			mediaName.textContent = photographerEachIdMedia[index++].title;
-			console.log("6");
-			console.log(index);
-			console.log(slideIndex);
-			console.log(currentMediaIndex);
-		}
-	}
-	function handleKeyDown(event) {
-		if (event.key === "ArrowLeft" || event.key === "Left") {
-			prevSlide();
-			prevName();
-		} else if (event.key === "ArrowRight" || event.key === "Right") {
-			nextSlide();
-			nextName();
-		} else if (event.key === "Escape" || event.key === "Esc") {
-			closeModalSlider();
-		}
-	}
-
-	function addKeyboardListeners() {
-		document.addEventListener("keydown", handleKeyDown);
-	}
-
-	function removeKeyboardListeners() {
-		document.removeEventListener("keydown", handleKeyDown);
-	}
-
-	sliderBtnLeft.addEventListener("click", prevSlide);
-	sliderBtnLeft.addEventListener("click", prevName);
-	sliderBtnRight.addEventListener("click", nextSlide);
-	sliderBtnRight.addEventListener("click", nextName);
-
+	
+	sliderBtnLeft.addEventListener("click", prev);
+	sliderBtnRight.addEventListener("click", next);
+	
 	sliderBtnLeft.addEventListener("keydown", (e) => {
 		if (e.key === "Enter" || e.key === " ") {
-			prevSlide();
-			prevName();
+			prev();
 		}
 	});
-
+	
 	sliderBtnRight.addEventListener("keydown", (e) => {
 		if (e.key === "Enter" || e.key === " ") {
-			nextSlide();
-			nextName();
+			next();
 		}
 	});
+	
 
 	function closeModalSlider() {
 		sliderContainer.style.display = "none";
