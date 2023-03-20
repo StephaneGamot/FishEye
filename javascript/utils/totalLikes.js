@@ -17,6 +17,7 @@ export let totalLikes = total.reduce(allPhotographeLikes);
 export function allPhotographeLikes(a, b) {
 	return a + b;
 }
+
 // Je récupére le prix journalier du photographe
 export const dailyPrice = photographerId[0].price;
 

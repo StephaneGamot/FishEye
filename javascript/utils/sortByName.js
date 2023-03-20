@@ -5,7 +5,7 @@ import { openModalSlider } from "./SliderOpenClose.js";
 
 console.log(photographerEachIdMedia)
 export async function sortByName() {
-	galleryMedia.innerHTML = ""; // Vider la galerie
+	galleryMedia.innerHTML = "";                                     // Vider la galerie
 	photographerEachIdMedia.sort((a, b) => {
 		if (a.title < b.title) {
 			return -1;
@@ -15,9 +15,9 @@ export async function sortByName() {
 			return 0;
 		}
 	}).forEach((elem, index) => {
-		elem["data-order"] = index + 1; // ajouter une propriété "data-order" à chaque élément
+		elem["data-order"] = index + 1;                              // ajouter une propriété "data-order" à chaque élément
 		if ("image" in elem) {
-		  const photoMedia = photoTemplate(elem, index); // passer l'index en paramètre
+		  const photoMedia = photoTemplate(elem, index);             // passer l'index en paramètre
 		  const photoMediaDom = photoMedia.photoTemplateCardDom();
 		  galleryMedia.appendChild(photoMediaDom);
 		} else if ("video" in elem) {

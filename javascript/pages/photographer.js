@@ -1,20 +1,11 @@
-import Api from "../api/api.js";
-import PhotographerProfilTemplate from "../template/photographerProfilTemplate.js";
 import photoTemplate from "../template/photoTemplate.js";
-import { VideoTemplate } from "../template/VideoTemplate.js";
-import { MediaFactory } from "../factories/mediaFactory.js";
-import { dropdownMenuSelect } from "../template/menuBtnTemplate.js";
 import { openModalSlider } from "../utils/SliderOpenClose.js";
-import SliderVideoTemplate from "../template/SliderVideoTemplate.js";
-import SliderPhotoTemplate from "../template/SliderPhotoTemplate.js";
-import { modalBtn, modal, displayModal, ModalContactForm } from "../utils/ModalContactForm.js";
+import { modalBtn, displayModal} from "../utils/ModalContactForm.js";
 import sortByDate from "../utils/sortByDate.js";
-import {sortByLike, newSortByLike} from "../utils/sortByLike.js";
+import {sortByLike} from "../utils/sortByLike.js";
 import { sortByName } from "../utils/sortByName.js";
-import { urlparam, ID, dataApi, photographers, media, galleryMedia, theSlide, slides, getMediasDataId, photoImgs  } from "../Config/GetAllData.js";
 import photographerMediaCreateDom from "../Config/photographerMediaCreateDom.js";
 import { allPhotographeLikes } from "../utils/totalLikes.js";
-
 import photographerCreateDom from "../utils/photographerCreateDom.js"
 
 /********************** Récupération des données pour les photographes ************************************/

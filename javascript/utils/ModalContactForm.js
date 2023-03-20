@@ -1,5 +1,5 @@
-import Api from "../api/api.js";
-import { photographers } from "../Config/getAllData.js";
+//import Api from "../api/api.js";
+import { photographerName } from "../Config/getAllData.js";
 
 export const modalBtn = document.getElementById("btnContact");
 export const modal = document.getElementById("contact_modal");
@@ -18,7 +18,7 @@ export async function ModalContactForm() {
 		modal.style.display = "none";
 	}
 
-	const PhotographName = photographers[0].name;               // Je recupere le nom du photographe
+	const PhotographName = photographerName;               // Je recupere le nom du photographe
 
 	// DOM
 	const firstName = document.getElementById("firstName");

@@ -1,34 +1,19 @@
-
-
-import { photographerEachIdMedia, galleryMedia } from "../Config/GetAllData.js";
-import { theSlide, mediaByFactory, getMediasDataId } from "../Config/GetAllData.js";
-import { slides, photoImgs, media, ID } from "../Config/GetAllData.js";
+import { photographerEachIdMedia } from "../Config/GetAllData.js";
 import SliderPhotoTemplate from "../template/SliderPhotoTemplate.js";
 import SliderVideoTemplate from "../template/SliderVideoTemplate.js";
-import photoTemplate from "../template/photoTemplate.js";
-import PhotoModels from "../models/PhotoModels.js";
+import { closeModalSlider } from "./SliderOpenClose.js";
+import { sliderContainer, slide, mediaName, modalCloseSlider } from "../Config/SliderData.js";
 
-const sliderContainer = document.getElementById("sliderContainer");
+// Attributs ARIA pour le container
 sliderContainer.setAttribute("role", "dialog");
 sliderContainer.setAttribute("aria-labelledby", "mediaName");
 
-const slide = document.getElementById("slide");
-const modalCloseSlider = document.getElementById("modal-close-slider");
-const sliderWidth = sliderContainer.offsetWidth;
-const mediaName = document.getElementById("mediaName");
-const whiteBg = document.getElementById("whiteBG");
+// les futurs boutons next et prev que je declare maintenant , que je return pour recuperer ailleurs
+let prev;
+let next;
 
-
-function closeModalSlider() {
-	sliderContainer.style.display = "none";
-	theSlide.innerHTML = ""; // Vider la galerie
-	slide.innerHTML = "";
-	whiteBg.style.display = "none";
-	removeKeyboardListeners(); // je retire les gestionnaires d'événements pour clavier lorsque le modal de ferme
-	sliderContainer.removeAttribute("aria-modal"); // Retirer l'attribut aria-modal lorsque le modal est fermé
-}
-
-function handleKeyDown(event) {
+// fonction pour gerer au clavier pour les touches gauche, droite et esc
+export function handleKeyDown(event) {
 	if (event.key === "ArrowLeft" || event.key === "Left") {
 		prev();
 	} else if (event.key === "ArrowRight" || event.key === "Right") {
@@ -38,15 +23,17 @@ function handleKeyDown(event) {
 	}
 }
 
-
-function addKeyboardListeners() {
+// pemet d'ecouter ces 3 touches (gauche, droite et esc) cela enclenche ...
+export function addKeyboardListeners() {
 	document.addEventListener("keydown", handleKeyDown);
 }
 
-function removeKeyboardListeners() {
+// pemet de retirer cette ecoute
+export function removeKeyboardListeners() {
 	document.removeEventListener("keydown", handleKeyDown);
 }
 
+// J'affiche le slider photos + video
 export function displayPhotosModalSlider(index) {
 	photographerEachIdMedia.forEach((elem) => {
 		if ("image" in elem) {
@@ -62,197 +49,90 @@ export function displayPhotosModalSlider(index) {
 		}
 	});
 
-	const modalCloseSlider = document.getElementById("modal-close-slider");
 	modalCloseSlider.addEventListener("click", closeModalSlider);
 
+	// je definie les attributs Aria des boutons gauche et droite
 	const sliderBtnLeft = document.getElementById("slider-btn-left");
 	const sliderBtnRight = document.getElementById("slider-btn-right");
 	sliderBtnLeft.setAttribute("tabindex", "0");
 	sliderBtnRight.setAttribute("tabindex", "0");
 	sliderBtnLeft.setAttribute("aria-label", "Image précédente");
-sliderBtnRight.setAttribute("aria-label", "Image suivante");
+	sliderBtnRight.setAttribute("aria-label", "Image suivante");
 
+	// J'initialise les variables pour gerer l'affichage des image du slider
+	let slideIndex = parseInt(index) - 1;
+	let currentMediaIndex = index - 1;
+	let sliderImgTitle = photographerEachIdMedia[currentMediaIndex].title;
+	mediaName.textContent = sliderImgTitle;
+	const sliderImgTitleLength = photographerEachIdMedia.length;
+	let newMediaIndexParse = parseInt(sliderImgTitleLength);
 
-let slideIndex = parseInt(index) - 1;
-let currentMediaIndex = index - 1;
-let sliderImgTitle = photographerEachIdMedia[currentMediaIndex].title;
-mediaName.textContent = sliderImgTitle;
-const sliderImgTitleLength = photographerEachIdMedia.length;
-let newMediaIndexParse = parseInt(sliderImgTitleLength);
+	// j'affiche la photo en cours
+	showSlide(slideIndex);
 
-showSlide(slideIndex);
-
-function showSlide(n) {
-    slide.style.transform = `translateX(-${n * 100}%)`;
-}
-
-let clickCount = 0;
-
-function prev() {
-	clickCount++;
-    if (slideIndex === 0) {
-        slideIndex = slide.children.length - 1;
-        index = newMediaIndexParse;
-    } else if (clickCount === 1) {
-		index -= 1;
-		slideIndex--;
+	// va me permettre de decaler d'une photo a une autre
+	function showSlide(n) {
+		slide.style.transform = `translateX(-${n * 100}%)`;
 	}
-	else {
-        slideIndex--;
-    }
-    index--;
-    showSlide(slideIndex);
-    mediaName.textContent = photographerEachIdMedia[index].title;
-}
 
-function next() {
-	clickCount++;
-    if (slideIndex === slide.children.length - 1) {
-        slideIndex = 0;
-        index = -1;
-    } else if (clickCount === 1) {
-		slideIndex++;
-		index -= 1;
-	}else {
-        slideIndex++;
-    }
-    index++;
-    showSlide(slideIndex);
-    mediaName.textContent = photographerEachIdMedia[index].title;
-}
+	// j'initialise mon compteur à click
+	let clickCount = 0;
 
+	// Pour passer à l'image precedante
+	prev = function () {
+		clickCount++;
+		if (slideIndex === 0) {
+			slideIndex = slide.children.length - 1;
+			index = newMediaIndexParse;
+		} else if (clickCount === 1) {
+			index -= 1;
+			slideIndex--;
+		} else {
+			slideIndex--;
+		}
+		index--;
+		showSlide(slideIndex);
+		mediaName.textContent = photographerEachIdMedia[index].title;
+	};
+
+	// Pour passer à l'image suivante
+	next = function () {
+		clickCount++;
+		if (slideIndex === slide.children.length - 1) {
+			slideIndex = 0;
+			index = -1;
+		} else if (clickCount === 1) {
+			slideIndex++;
+			index -= 1;
+		} else {
+			slideIndex++;
+		}
+		index++;
+		showSlide(slideIndex);
+		mediaName.textContent = photographerEachIdMedia[index].title;
+	};
+
+	// J'ajoute des ecouteurs pour les boutons Gauche et Droite
 	sliderBtnLeft.addEventListener("click", prev);
 	sliderBtnRight.addEventListener("click", next);
-	
+
+	// j'installe un ecouteur dévenement pour utiliser le clavier (autre systeme que plus haut)
 	sliderBtnLeft.addEventListener("keydown", (e) => {
 		if (e.key === "Enter" || e.key === " ") {
 			e.preventDefault();
 			prev();
 		}
 	});
-	
+
 	sliderBtnRight.addEventListener("keydown", (e) => {
 		if (e.key === "Enter" || e.key === " ") {
 			e.preventDefault();
 			next();
 		}
 	});
-	
-
-	
+	// je retourne prev et Next pour les utiliser dans ma fonction handleKeyDown (en dehors ...)
+	return {
+		prev,
+		next,
+	};
 }
-
-export function openModalSlider(index) {
-	sliderContainer.style.display = "block";
-	theSlide.innerHTML = ""; // Vider la galerie
-	slide.innerHTML = "";
-	whiteBg.style.display = "block";
-	console.log("AZ");
-	displayPhotosModalSlider(index);
-	addKeyboardListeners(); // j'ajoute les gestionnaires d'événements pour clavier lorsque le modal s'ouvre
-	sliderContainer.setAttribute("aria-modal", "true"); // Ajouter l'attribut aria-modal lorsque le modal est ouvert
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-export default function Slider (){
-
-    const slides = [...photographerEachIdMedia]; // je crée un tableau a partir de la class .... je récupere toutes les slides
-    console.log(slides);
-    
-    const sliderData = {
-        locked: false,
-        direction: 0,
-        slideOutIndex: 0,
-        slideInIndex: 0,
-    };
-    console.log(sliderData);
-    const directionButtons = [...document.querySelectorAll(".slider-btn")]; // je crée un tableau a partir de la class .slide (les <div> ayant pour class .slide)
-    console.log("je m'en vais");
-    directionButtons.forEach((btn) => btn.addEventListener("click", handleClick)); // j'enclenche la fonction handleClick
-    
-    function handleClick(e) {
-        if (sliderData.locked) return;
-        sliderData.locked = true;
-    
-        getDirection(e.target);
-    
-        slideOut();
-    }
-    
-    
-    function getDirection(btn) {
-	sliderData.direction = btn.className.includes("right") ? 1 : -1;
-
-	//sliderData.slideOutIndex = slides.findIndex((slide) => slide.classList.contains("active"));
-    sliderData.slideOutIndex = slides.indexOf(document.querySelector('.active'));
-
-	if (sliderData.slideOutIndex + sliderData.direction > slides.length - 1) {
-		sliderData.slideInIndex = 0;
-	} else if (sliderData.slideOutIndex + sliderData.direction < 0) {
-		sliderData.slideInIndex = slides.length - 1;
-	} else {
-		sliderData.slideInIndex = sliderData.slideOutIndex + sliderData.direction;
-	}
-}
-    
-    // je gere le slider(photo) le
-    function slideOut() {
-        slideAnimation({
-            // Récupération de la fonction pour les "effets Speciaux" pour ...
-            el: slides[sliderData.slideInIndex], // je recupere l'index de la "futur photo"
-            props: {
-                // je change certains props
-                display: "flex",
-                transform: `translateX(${sliderData.direction < 0 ? "100%" : "-100%"})`, // si < alors l'element viendra de la droite et > viendra e la gauche
-                opacity: 0,
-            },
-        });
-    
-        // je donne un effet a celle qui s'en va
-        slideAnimation({
-            el: slides[sliderData.slideOutIndex], // je recupere l'index de "l'ex photo"
-            props: {
-                display: "flex",
-                transition: "transform 0.4s cubic-bezier(0.74, -0.34, 1, 1.19), opacity 0.4s ease-out", // je lui donne un effet retro
-                transform: `translateX(${sliderData.direction < 0 ? "-100%" : "100%"})`,
-                opacity: 0,
-            },
-        });
-        slides[sliderData.slideOutIndex].addEventListener("transitionend", slideIn); // me permet d'enclencher la fonction SlideIn (apres avoir fait partir l'ex)
-    }
-    // Fonction qui permet de recuperer chaque props qui se trouve (slideOut) qui permet de changer ses props
-    function slideAnimation(animationObject) {
-        for (const prop in animationObject.props) {
-            animationObject.el.style[prop] = animationObject.props[prop];
-        }
-    }
-    // fonction me permet d'enclencher l'arrrivé de la nouvelle photo
-    function slideIn(e) {
-        slideAnimation({
-            el: slides[sliderData.slideInIndex],
-            props: {
-                transition: "transform 0.4s opacity 0.6s ease-out",
-                transform: "translateX(0%)",
-                opacity: 1,
-            },
-        });
-        slides[sliderData.slideInIndex].classList.add("active"); // nouvelle photo = on lui rajoute la classe active
-        slides[sliderData.slideOutIndex].classList.remove("active"); // ancienne photo = on lui retire la classe active
-        e.target.removeEventListener("transitionend", slideIn); // puis je lui retire ....  puisqu'elle est partie
-        slides[sliderData.slideOutIndex].style.display = "none"; // je la fais disparaitre (Abracadabra)
-    }
-    
-    }
-    Slider ();

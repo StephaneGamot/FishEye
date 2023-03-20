@@ -7,7 +7,7 @@ export let newSortByLike;
 
 export function sortByLike() {
 
-	galleryMedia.innerHTML = ""; // Vider la galerie
+	galleryMedia.innerHTML = "";                                     // Vider la galerie
 
 	photographerEachIdMedia.sort((a, b) => {
 		if (a.likes < b.likes) {
@@ -18,9 +18,9 @@ export function sortByLike() {
 		  return 0;
 		}
 	  }).forEach((elem, index) => {
-		elem["data-order"] = index + 1; // j'ajoute une propriété "data-order" à chaque élément
+		elem["data-order"] = index + 1;                              // j'ajoute une propriété "data-order" à chaque élément
 		if ("image" in elem) {
-		  const photoMedia = photoTemplate(elem, index); // passer l'index en paramètre
+		  const photoMedia = photoTemplate(elem, index);             // passer l'index en paramètre
 		  const photoMediaDom = photoMedia.photoTemplateCardDom();
 		  galleryMedia.appendChild(photoMediaDom);
 		} else if ("video" in elem) {
@@ -35,6 +35,5 @@ export function sortByLike() {
 modalBtnSlider.forEach((media, index) => {	
 	media.addEventListener("click", () => openModalSlider(media.dataset.index));	
 });
-console.log(photographerEachIdMedia);
 newSortByLike = photographerEachIdMedia;
 }

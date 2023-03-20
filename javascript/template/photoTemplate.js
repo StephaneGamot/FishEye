@@ -1,4 +1,3 @@
-import { totalLikes } from "../utils/totalLikes.js";
 import toggleLike from "./likeTemplate.js"
 
 export default function photoTemplate(data, index) {

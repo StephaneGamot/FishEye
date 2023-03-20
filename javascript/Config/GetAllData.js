@@ -7,10 +7,10 @@ export const ID = urlparam.get("id");                                           
 export const dataApi = new Api();                                                        // je recupere la structure de l'appel de l'API
 export const { photographers } = await dataApi.getPhotographerById(ID);                  // je recupere les données des photographes
 export const photographerId = photographers.find((elem) => elem.id == ID).id;            // je selectionne un seul photographe (celui choisi)
+export const photographerName = photographers.find((elem) => elem.id == ID).name;        // je recupere le nom du photographe
 export const { media } = await dataApi.getMediasById(ID);                                // Je récupere le travail des photographes
 export const photographerEachIdMedia = media.filter((elem) => elem.photographerId == ID);// Je sélectionne le travail d'un photographe (celui choisi)
-export const galleryMedia = document.getElementById("gallery-media");                    // je localise ma gallerie de photos
-export const theSlide = document.getElementById("slide");                                // je localise le slide du slider
+export const galleryMedia = document.getElementById("gallery-media");                    // je localise ma gallerie de photos                              
 export const slides = [...photographerEachIdMedia];                                      // Tableau avec tous les medias
 export const photoImgs = document.querySelectorAll(".photograph-photoImg");              // Noeud recuperant les photos
 export const recupMediaId = photographerEachIdMedia.map((item) => item.id);              // cela affiche tous les Id s des medias de l'artiste
