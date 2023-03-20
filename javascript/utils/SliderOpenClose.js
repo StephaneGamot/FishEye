@@ -17,7 +17,8 @@ const modalCloseSlider = document.getElementById("modal-close-slider");
 const sliderWidth = sliderContainer.offsetWidth;
 const mediaName = document.getElementById("mediaName");
 const whiteBg = document.getElementById("whiteBG");
-
+let prev;
+let next;
 
 function closeModalSlider() {
 	sliderContainer.style.display = "none";
@@ -88,7 +89,7 @@ function showSlide(n) {
 
 let clickCount = 0;
 
-function prev() {
+prev = function() {
 	clickCount++;
     if (slideIndex === 0) {
         slideIndex = slide.children.length - 1;
@@ -105,7 +106,7 @@ function prev() {
     mediaName.textContent = photographerEachIdMedia[index].title;
 }
 
-function next() {
+next = function() {
 	clickCount++;
     if (slideIndex === slide.children.length - 1) {
         slideIndex = 0;
@@ -138,7 +139,10 @@ function next() {
 		}
 	});
 	
-
+	return {
+		prev,
+		next,
+	  };
 	
 }
 
