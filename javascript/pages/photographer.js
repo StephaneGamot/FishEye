@@ -2,12 +2,12 @@ import photoTemplate from "../template/photoTemplate.js";
 import { openModalSlider } from "../utils/SliderOpenClose.js";
 import { modalBtn, displayModal } from "../utils/ModalContactForm.js";
 import sortByDate from "../utils/sortByDate.js";
-import { sortByLike } from "../utils/sortByLike.js";
+//import { sortByLike } from "../utils/sortByLike.js";
 import { sortByName } from "../utils/sortByName.js";
 import photographerMediaCreateDom from "../Config/photographerMediaCreateDom.js";
 import { allPhotographeLikes } from "../utils/totalLikes.js";
 import photographerCreateDom from "../utils/photographerCreateDom.js";
-//import {dropdownMenuSelect} from "../template/menuBtnTemplate.js"
+import { handleClick, closeMenu } from "../template/menuBtnTemplate.js";
 
 /********************** Récupération des données pour les photographes ************************************/
 
@@ -21,22 +21,6 @@ modalBtn.addEventListener("click", displayModal);
 
 // Tri des photos par nb de coeur du - au +
 const dropdownMenu = document.getElementById("dropdown-menu");
-
-let isMenuOpen = false;
-
-function handleClick() {
-	if (!isMenuOpen) {
-		dropdownMenuSelect();
-		isMenuOpen = true;
-	} else {
-		sortByLike();
-	}
-}
-
-function dropdownMenuSelect() {
-	dropdownMenu.style.display = "block";
-	arrow.style.transform = 'rotate(180deg)';
-}
 
 // Tri des photos par nb de coeur du - au +
 const dropdownButtonPopular = document.getElementById("dropdown-button-popular");
@@ -57,15 +41,6 @@ dropdownButtonPopular.addEventListener("keydown", (event) => {
 		lastKeyPressTime = currentTime;
 	}
 });
-
-// Fonction pour fermer le menu déroulant
-function closeMenu() {
-	if (isMenuOpen) {
-		dropdownMenu.style.display = "none";
-		arrow.style.transform = 'rotate(0deg)';
-		isMenuOpen = false;
-	}
-}
 
 dropdownButtonPopular.addEventListener("dblclick", closeMenu);
 
