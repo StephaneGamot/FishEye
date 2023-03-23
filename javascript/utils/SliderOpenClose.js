@@ -13,11 +13,14 @@ export function closeModalSlider() {
 	sliderContainer.removeAttribute("aria-modal");         // Retirer l'attribut aria-modal lorsque le modal est fermé
 }
 
+/**
+ * It opens a modal slider with the image at the given index.
+ * @param index - The index of the image to open the modal slider at.
+ */
 export function openModalSlider(index) {
 	sliderContainer.style.display = "block";
 	slide.innerHTML = "";
 	whiteBg.style.display = "block";
-	console.log("AZ");
 	displayPhotosModalSlider(index);                       // j'enclenche la fonction display... avec la photo et l'index demandé
 	addKeyboardListeners();                                // j'ajoute les gestionnaires d'événements pour clavier lorsque le modal s'ouvre
 	sliderContainer.setAttribute("aria-modal", "true");    // Ajouter l'attribut aria-modal lorsque le modal est ouvert
