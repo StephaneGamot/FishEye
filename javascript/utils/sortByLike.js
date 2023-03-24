@@ -5,10 +5,13 @@ import { openModalSlider } from "./SliderOpenClose.js";
 
 export let newSortByLike;
 
+/**
+ *Il vide la galerie, trie le tableau de médias par likes, ajoute une propriété "data-order" à chaque élément
+ * puis affiche les médias dans cette même galerie
+ */
 export function sortByLike() {
 
 	galleryMedia.innerHTML = "";                                     // Vider la galerie
-
 	photographerEachIdMedia.sort((a, b) => {
 		if (a.likes < b.likes) {
 		  return -1;

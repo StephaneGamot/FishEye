@@ -5,6 +5,10 @@ import { removeKeyboardListeners, addKeyboardListeners } from "./Slider.js";
 sliderContainer.setAttribute("role", "dialog");
 sliderContainer.setAttribute("aria-labelledby", "mediaName");
 
+/**
+ * Quand on clique sur X le modal se ferme, la gallerie se vide, le fond blanc disparait 
+ * et les keyboard listeners et l'accessibilité sont retirés
+ */
 export function closeModalSlider() {
 	sliderContainer.style.display = "none";                // je ferme le modal
 	slide.innerHTML = "";                                  //Je vide la gallery
@@ -14,8 +18,8 @@ export function closeModalSlider() {
 }
 
 /**
- * It opens a modal slider with the image at the given index.
- * @param index - The index of the image to open the modal slider at.
+ * Il ouvre le carrousel dans le modal sur l'image avec l'index donné.
+ * @param index - l'index de l'image avec lequel j'ouvre le slider.
  */
 export function openModalSlider(index) {
 	sliderContainer.style.display = "block";

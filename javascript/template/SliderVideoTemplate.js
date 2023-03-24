@@ -2,6 +2,10 @@ export default function SliderVideoTemplate(data) {
 	const { title, video, id } = data;
 	const carrouselVideo = `/assets/media/${video}`;
 
+	/**
+	 * création de l'element Video avec ses attributs
+	 * @returns l'element Video
+	 */
 	function carrouselVideoDom() {
 		const videoSliderDisplay = document.createElement("video");
 		videoSliderDisplay.classList.add("slider-video");

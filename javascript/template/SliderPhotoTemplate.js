@@ -3,7 +3,7 @@ export default function SliderPhotoTemplate(data) {
 	const carrouselMedia = `/assets/media/${image}`;
 
 	/**
-	 * cette fonction permet de de creer une image 
+	 * cette fonction permet de de creer une image
 	 * @returns imgSliderDisplay type node element
 	 */
 	function createImgElement() {
@@ -20,7 +20,7 @@ export default function SliderPhotoTemplate(data) {
 		const imgSliderDisplayTitle = document.createElement("h2");
 		imgSliderDisplayTitle.textContent = title;
 		imgSliderDisplayTitle.id = `slider-title-${id}`;
-		
+
 		return imgSliderDisplay;
 	}
 
@@ -28,7 +28,7 @@ export default function SliderPhotoTemplate(data) {
 		title,
 		image,
 		id,
-	
+
 		createImgElement,
 	};
 }

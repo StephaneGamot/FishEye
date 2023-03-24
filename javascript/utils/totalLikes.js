@@ -14,6 +14,12 @@ let total = photographerEachIdMedia.map((item) => {
 // Addition des phot likes
 export let totalLikes = total.reduce(allPhotographeLikes);
 
+/**
+ * `allPhotographeLikes` prend deux arguments, `a` et `b`, et renvoie la somme de ces deux arguments
+ * @param a - etant le 1er nombre à ajouter
+ * @param b - La valeur courante traitée dans le tableau.
+ * @returns la somme de toutes les valeurs du tableau
+ */
 export function allPhotographeLikes(a, b) {
 	return a + b;
 }

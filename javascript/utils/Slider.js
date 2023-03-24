@@ -12,7 +12,10 @@ sliderContainer.setAttribute("aria-labelledby", "mediaName");
 let prev;
 let next;
 
-// fonction pour gerer au clavier pour les touches gauche, droite et esc
+/**
+ * fonction pour gerer au clavier pour les touches gauche, droite et esc
+ * @param event 
+ */
 export function handleKeyDown(event) {
 	if (event.key === "ArrowLeft" || event.key === "Left") {
 		prev();
@@ -23,25 +26,33 @@ export function handleKeyDown(event) {
 	}
 }
 
-// pemet d'ecouter ces 3 touches (gauche, droite et esc) cela enclenche ...
+/**
+ * pemet d'ecouter ces 3 touches (gauche, droite et esc) cela enclenche ...
+ */
 export function addKeyboardListeners() {
 	document.addEventListener("keydown", handleKeyDown);
 }
 
-// pemet de retirer cette ecoute
+/**
+ * retire cette ecoute
+ */
 export function removeKeyboardListeners() {
 	document.removeEventListener("keydown", handleKeyDown);
 }
 
-// J'affiche le slider photos + video
+/**
+ * affiche le slider photos + video
+ * @param index - l'index de l'image cliquée
+ * @returns prev et next
+ */
 export function displayPhotosModalSlider(index) {
 	photographerEachIdMedia.forEach((elem) => {
 		if ("image" in elem) {
-			const photoMedia = SliderPhotoTemplate(elem); // Òbjet avce les infos de la photos
-			const photoMediaDom = photoMedia.createImgElement(); // la phot dans le dom
+			const photoMedia = SliderPhotoTemplate(elem);         // Òbjet avce les infos de la photos
+			const photoMediaDom = photoMedia.createImgElement();  // la phot dans le dom
 			slide.appendChild(photoMediaDom);
 		} else if ("video" in elem) {
-			const videoMedia = SliderVideoTemplate(elem); // Òbjet avce les infos de la photos
+			const videoMedia = SliderVideoTemplate(elem);         // Òbjet avce les infos de la photos
 			const videoMediaDom = videoMedia.carrouselVideoDom(); //
 			slide.appendChild(videoMediaDom);
 		} else {
@@ -71,6 +82,10 @@ export function displayPhotosModalSlider(index) {
 	showSlide(slideIndex);
 
 	// va me permettre de decaler d'une photo a une autre
+	/**
+	 * va me permettre de decaler d'une photo a une autre en la decalant à 100% de sa largeur
+	 * @param n - l'index du slide que je veux montrer
+	 */
 	function showSlide(n) {
 		slide.style.transform = `translateX(-${n * 100}%)`;
 	}

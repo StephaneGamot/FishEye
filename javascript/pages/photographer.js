@@ -25,14 +25,15 @@ const dropdownMenu = document.getElementById("dropdown-menu");
 // Tri des photos par nb de coeur du - au +
 const dropdownButtonPopular = document.getElementById("dropdown-button-popular");
 dropdownButtonPopular.addEventListener("click", handleClick);
-let lastKeyPressTime = 0;
-const DOUBLE_CLICK_DELAY = 300; // en millisecondes
+let lastKeyPressTime = 0;              // je declare un compteur initialisé à 0
+const DOUBLE_CLICK_DELAY = 300;        // en millisecondes
 
+// pour l'accessibilité du bouton tri
 dropdownButtonPopular.addEventListener("keydown", (event) => {
 	if (event.key === "Enter" || event.key === " ") {
 		event.preventDefault();
 
-		const currentTime = new Date().getTime();
+		const currentTime = new Date().getTime();   // va me permettre avec un double "enter" de fermer le dropdown
 		if (currentTime - lastKeyPressTime < DOUBLE_CLICK_DELAY) {
 			closeMenu();
 		} else {
@@ -44,7 +45,7 @@ dropdownButtonPopular.addEventListener("keydown", (event) => {
 
 dropdownButtonPopular.addEventListener("dblclick", closeMenu);
 
-// Tri des photos par date du + ancien au + recent
+// Tri des photos par date du + ancien au + recent (accesssibilité)
 const dropdownButtonDate = document.getElementById("dropdown-button-date");
 dropdownButtonDate.addEventListener("click", sortByDate);
 dropdownButtonDate.addEventListener("keydown", (event) => {
@@ -54,7 +55,7 @@ dropdownButtonDate.addEventListener("keydown", (event) => {
 	}
 });
 
-// Tri des photos par ordre alphabétique
+// Tri des photos par ordre alphabétique (accesssibilité)
 const dropdownButtonTitle = document.getElementById("dropdown-button-title");
 dropdownButtonTitle.addEventListener("click", sortByName);
 dropdownButtonTitle.addEventListener("keydown", (event) => {
@@ -70,6 +71,7 @@ photographerMediaCreateDom();
 
 /********************** Ouverture du modal / Slider ************************************/
 
+// va me permettre d'avoir au clique, limage qui correspond a celle que j'ai cliqué
 const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");
 modalBtnSlider.forEach((media, index) => {
 	media.addEventListener("click", () => openModalSlider(media.dataset.index));

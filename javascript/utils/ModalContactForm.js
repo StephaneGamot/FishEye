@@ -1,8 +1,11 @@
-//import Api from "../api/api.js";
 import { photographerName } from "../Config/getAllData.js";
 
 export const modalBtn = document.getElementById("btnContact");
 export const modal = document.getElementById("contact_modal");
+
+/**
+ * Cette fonction affiche le modal et donne le focus au 1er élément et l'enferme dans la modale
+ */
 export function displayModal() {
 	modal.style.display = "block";
 	focusOnFirstElement();
@@ -10,13 +13,17 @@ export function displayModal() {
 	ModalContactForm();
 }
 
-// Met le focus sur le premier élément du formulaire (firstName)
+/**
+ * Met le focus sur le premier élément du formulaire (firstName)
+ */
 function focusOnFirstElement() {
 	const firstName = document.getElementById("firstName");
 	firstName.focus();
 }
 
-// Gère le focus à l'intérieur du modal et l'empêche de sortir
+/**
+ * // Gère le focus à l'intérieur du modal et l'empêche de sortir
+ */
 function trapFocus() {
 	const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 	const modal = document.getElementById("modalContact");
@@ -32,13 +39,13 @@ function trapFocus() {
 		}
 
 		if (e.shiftKey) {
-			// si majuscule et tab sont enfoncés, déplacez le focus vers l'élément précédent
+			// si la touche majuscule et tab sont enfoncés, le focus est déplacé vers l'élément précédent
 			if (document.activeElement === firstFocusableElement) {
 				lastFocusableElement.focus();
 				e.preventDefault();
 			}
 		} else {
-			// si tab est enfoncé, déplacez le focus vers l'élément suivant
+			// si le tab est enfoncé,le focus est déplacé vers l'élément suivant
 			if (document.activeElement === lastFocusableElement) {
 				firstFocusableElement.focus();
 				e.preventDefault();
@@ -47,7 +54,10 @@ function trapFocus() {
 	});
 }
 
-// permet de gerer au click la fermeture du modal
+/**
+ *permet de gerer au click la fermeture du modal
+ * Affiche une erreur si ce n 'est pas rempli correctement
+ */
 export async function ModalContactForm() {
 	const modalClose = document.getElementById("close-modal");
 	modalClose.setAttribute("aria-label", "Fermer le formulaire de contact");
@@ -59,17 +69,17 @@ export async function ModalContactForm() {
 
 	// Gestionnaire d'événements pour fermer le modal avec les touches du clavier
 	function handleKeyboardClose(event) {
-		// Vérifier si la touche Entrée est enfoncée lorsque l'élément modalClose a le focus
+		// Si le focus est sur X alors enter ou Esc permettront de ferme le modal
 		if (event.target === modalClose && event.key === "Enter") {
 			closeModal();
 		}
-		// Vérifier si la touche Échap est enfoncée
+		// si la touche Échap est enfoncée
 		if (event.key === "Escape") {
 			closeModal();
 		}
 	}
 	modalClose.addEventListener("keydown", handleKeyboardClose);
-	const PhotographName = photographerName; // Je recupere le nom du photographe
+	const PhotographName = photographerName;                         // Je recupere le nom du photographe
 
 	// DOM
 	const firstName = document.getElementById("firstName");
@@ -111,11 +121,6 @@ export async function ModalContactForm() {
 	const alphaRegex = /^[a-zA-Zéêëèîïâäàçù ,.'-]{2,70}$/;
 	const emailRegex = /^([a-zA-Z0-9.-_--]+[@]{1}[a-zA-Z0-9.-_--]+[.]{1}[a-z]{2,3}){0,90}$/;
 
-	const firstNameValue = document.getElementById("firstName").value;
-	const lastNameValue = document.getElementById("lastName").value;
-	const emailValue = document.getElementById("email").value;
-	const messageValue = document.getElementById("message").value;
-
 	// Listen input addEventListener
 	firstName.addEventListener("input", function () {
 		validateFirstName();
@@ -130,9 +135,12 @@ export async function ModalContactForm() {
 		validateMessage();
 	});
 	sendBtn.addEventListener("click", function (event) {
-		// création d'un addEventListener pour le bouton submit j'ecoute pour voir s'il repond a ma demande
+		                        // création d'un addEventListener pour le bouton submit j'ecoute pour voir s'il repond a ma demande
+
 		event.preventDefault(); // Je bloque tant que tout n 'est pas accepté
-		validate(); // c'est la fonction qui sera exécuté lorsque on ecrira dans l'input (suite a notre ecoute)
+		validate();             // c'est la fonction qui sera exécuté lorsque on ecrira dans l'input (suite a notre ecoute)
+		
+		// me permet de recuperer dans la console les infos ecrite sur le modal
 		console.log(
 			"Nom:" +
 				" " +

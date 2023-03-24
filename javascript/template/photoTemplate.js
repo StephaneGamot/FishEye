@@ -1,10 +1,18 @@
-import toggleLike from "./likeTemplate.js"
+import toggleLike from "./likeTemplate.js";
 
+/**
+ * @param data - le data object qui contient les infos sur chaque photo
+ * @param index - l'index de chaque photo dans le tableau des photos
+ * @returns la fonction photoTemplate en totalité
+ */
 export default function photoTemplate(data, index) {
 	const { title, image, likes, id } = data;
 	const pictureMedia = `/assets/media/${image}`;
 
-	// création de la gallery de photos
+	/**
+	 * création des cartes contenu dans la gallery avec photos, nom et likes
+	 * @returns the articleMedia element.
+	 */
 	function photoTemplateCardDom() {
 		const articleMedia = document.createElement("article");
 		const galleryPic = document.createElement("div");

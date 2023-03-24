@@ -3,6 +3,9 @@ import PhotographerProfilTemplate from "../template/photographerProfilTemplate.j
 
 const photographerId = photographers.filter((elem) => elem.id == ID);           // je selectionne un seul photographe (celui choisi)
 
+/**
+ * Création du dom pour chaque photographe dans le tableau 
+ */
 export default async function photographerCreateDom() {
 	const photographerMain = document.getElementById("head-main");              // je les positionne dans l'element ID "head-main"
 

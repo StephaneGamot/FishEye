@@ -1,10 +1,14 @@
-import toggleLike from "./likeTemplate.js"
+import toggleLike from "./likeTemplate.js";
 
 export function VideoTemplate(data, index) {
 	const { id, title, video, likes } = data;
 	const Video = `/assets/media/${video}`;
 
 	// création de la gallery de photos
+	/**
+	 * création de la carte Video (dans la gallery) avec son titre et ses likes
+	 * @returns l'article (carte video)
+	 */
 	function videoTemplateCardDom() {
 		const articleMedia = document.createElement("article");
 		const galleryPic = document.createElement("div");

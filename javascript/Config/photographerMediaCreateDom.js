@@ -2,6 +2,9 @@ import {mediaByFactory, galleryMedia}  from "../Config/GetAllData.js"
 import {VideoTemplate} from "../template/VideoTemplate.js"
 import photoTemplate from "../template/photoTemplate.js"
 
+/**
+ * Je prend le data de l'Api et je recrée le DOM  pour chaques photos et videos
+ */
 export default async function photographerMediaCreateDom() {
 	
 	mediaByFactory.forEach((elem, index) => {

@@ -3,6 +3,10 @@ import photoTemplate from "../template/photoTemplate.js";
 import { VideoTemplate } from "../template/VideoTemplate.js";
 import { openModalSlider } from "./SliderOpenClose.js";
 
+/**
+ * Cette fonction tri le tableau par date à l'aide du "data-order" sorts the array of objects by date, then loops through the array and adds a property
+ * "data-order" sur chaque objet puis parcourt à nouveau le tableau et crée une carte photo ou vidéo pour chaque objet, puis ajoute un récepteur d'événements à chaque carte
+ */
 export default function sortByDate() {
 	galleryMedia.innerHTML = "";                                     // Vider la galerie
 	photographerEachIdMedia.sort((a, b) => {

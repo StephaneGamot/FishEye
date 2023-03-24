@@ -3,6 +3,10 @@ import photoTemplate from "../template/photoTemplate.js";
 import { VideoTemplate } from "../template/VideoTemplate.js";
 import { openModalSlider } from "./SliderOpenClose.js";
 
+/**
+ *Il trie le tableau d'objets multimédias par nom, puis il parcourt le tableau et 
+ *  crée un nouvel élément DOM pour chaque objet et enfin il l'ajoute  à la galerie.
+ */
 export async function sortByName() {
 	galleryMedia.innerHTML = ""; // Vider la galerie
 	photographerEachIdMedia
