@@ -8,7 +8,7 @@ export default function photographerProfilTemplate(data) {
 	 * @returns  l'élement article avec toutes ses infos .
 	 */
 	function getPhotographerCardDOM() {
-		const article = document.createElement("article");
+		const article = document.createElement("article");;
 
 		const sectionHead = document.createElement("section"); // Creation de la section d'entête
 		sectionHead.classList.add("photograph-header");
@@ -23,19 +23,22 @@ export default function photographerProfilTemplate(data) {
 		divRight.classList.add("photograph-divRight");
 
 		const h1 = document.createElement("h1"); // creation du titre (nom)
-		//h1.setAttribute("aria-label", "nom du photographe: " + name);
+		h1.setAttribute("aria-label", "nom du photographe: " + name);
 		h1.classList.add("photograph-h1");
 		h1.textContent = name;
+		h1.setAttribute("tabindex", "0");
 
 		const ville = document.createElement("h2"); // creation de la ville + pays
 		ville.textContent = city + ", " + country;
-		//ville.setAttribute("aria-label", "ville: " + city + " " + "pays: " + country);
+		ville.setAttribute("aria-label", "ville: " + city + " " + "pays: " + country);
 		ville.classList.add("photographer-city");
+		ville.setAttribute("tabindex", "0");
 
 		const slogan = document.createElement("p"); // creation du slogan
 		slogan.textContent = tagline;
 		slogan.classList.add("photograph-slogan");
-		//slogan.setAttribute("aria-label", "slogan: " + tagline);
+		slogan.setAttribute("aria-label", "slogan: " + tagline);
+		slogan.setAttribute("tabindex", "0");
 
 		const button = document.getElementById("btnContact"); // creation du boutton (div centrale)
 		button.classList.add("contact_button");
@@ -45,6 +48,7 @@ export default function photographerProfilTemplate(data) {
 		photo.classList.add("photograph-pic");
 		photo.setAttribute("src", picture);
 		photo.setAttribute("alt", name);
+		photo.setAttribute("tabindex", "0");
 
 		article.appendChild(sectionHead); // creation des appenchild de la section d'entête
 		sectionHead.appendChild(divLeft);

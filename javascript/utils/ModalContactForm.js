@@ -112,6 +112,7 @@ export async function ModalContactForm() {
 	const messageErr = document.getElementById("messageErr");
 
 	// Ajout d'attributs aria-live pour informer les utilisateurs d'écran de lecture des erreurs
+	//firstNameErr.setAttribute("aria-invalid", "true");;
 	firstNameErr.setAttribute("aria-live", "polite");
 	lastNameErr.setAttribute("aria-live", "polite");
 	emailErr.setAttribute("aria-live", "polite");

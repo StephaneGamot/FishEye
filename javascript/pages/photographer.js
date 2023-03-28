@@ -2,7 +2,6 @@ import photoTemplate from "../template/photoTemplate.js";
 import { openModalSlider } from "../utils/SliderOpenClose.js";
 import { modalBtn, displayModal } from "../utils/ModalContactForm.js";
 import sortByDate from "../utils/sortByDate.js";
-//import { sortByLike } from "../utils/sortByLike.js";
 import { sortByName } from "../utils/sortByName.js";
 import photographerMediaCreateDom from "../Config/photographerMediaCreateDom.js";
 import { allPhotographeLikes } from "../utils/totalLikes.js";
@@ -33,7 +32,7 @@ dropdownButtonPopular.addEventListener("keydown", (event) => {
 	if (event.key === "Enter" || event.key === " ") {
 		event.preventDefault();
 
-		const currentTime = new Date().getTime();   // va me permettre avec un double "enter" de fermer le dropdown
+		const currentTime = new Date().getTime();               // va me permettre avec un double "enter" de fermer le dropdown
 		if (currentTime - lastKeyPressTime < DOUBLE_CLICK_DELAY) {
 			closeMenu();
 		} else {
@@ -73,9 +72,18 @@ photographerMediaCreateDom();
 
 // va me permettre d'avoir au clique, limage qui correspond a celle que j'ai cliqué
 const modalBtnSlider = document.querySelectorAll(".modal-btn-slider");
+
 modalBtnSlider.forEach((media, index) => {
-	media.addEventListener("click", () => openModalSlider(media.dataset.index));
+    media.setAttribute("tabindex", "0");
+    media.addEventListener("click", () => openModalSlider(media.dataset.index));
+    media.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openModalSlider(media.dataset.index);
+        }
+    });
 });
+
 
 /********************** Gere tous les Likes en bas de page ************************************/
 

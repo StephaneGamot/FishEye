@@ -13,8 +13,8 @@ export default function photographerTemplate(data) {
 	 */
 	function getUserCardDOM() {
 		const article = document.createElement("article");
+		article.setAttribute("aria-label", name);
 		const headCard = document.createElement("a");
-		headCard.setAttribute("aria-label", name);
 		headCard.href = photographerPageUrl;
 
 		const imgPortrait = document.createElement("img");
@@ -42,9 +42,9 @@ export default function photographerTemplate(data) {
 		article.appendChild(headCard);
 		headCard.appendChild(imgPortrait);
 		headCard.appendChild(h2Name);
-		article.appendChild(townCountry);
-		article.appendChild(taglinePhilosophie);
-		article.appendChild(pricePerDay);
+		headCard.appendChild(townCountry);
+		headCard.appendChild(taglinePhilosophie);
+		headCard.appendChild(pricePerDay);
 
 		return article;
 	}
